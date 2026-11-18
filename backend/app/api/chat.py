@@ -51,6 +51,8 @@ async def chat(req: ChatRequest):
         messages_for_llm = [{"role": m.role, "content": m.content} for m in history]
 
         async def event_stream():
+            # First send the conversation ID so the client can keep track
+            yield f"data: {json.dumps({'conversation_id': conv.id})}\n\n"
             try:
                 async for token in stream_chat(messages_for_llm):
                     yield f"data: {json.dumps({'token': token})}\n\n"
