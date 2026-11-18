@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RAG Chatbot SSE Test</title>
+  <style>
+    body {font-family: Arial, sans-serif; margin: 2rem;}
+    #output {white-space: pre-wrap; border: 1px solid #ccc; padding: 1rem; height: 300px; overflow-y: auto;}
+  </style>
+</head>
+<body>
+  <h1>RAG Chatbot – Streaming Chat Test</h1>
+  <button id="startBtn">Start Chat</button>
+  <div id="output"></div>
+
+  <script>
+    const btn = document.getElementById('startBtn');
+    const out = document.getElementById('output');
+
+    btn.addEventListener('click', async () => {
+      out.textContent = '';
+      const response = await fetch('http://127.0.0.1:8000/api/chat', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          messages: [{role: 'user', content: 'Explain RAG in two sentences'}]
+        })
+      });
+
+      if (!response.ok) {
+        out.textContent = `Error: ${response.status} ${response.statusText}`;
+        return;
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let done = false;
+      while (!done) {
+        const {value, done: streamDone} = await reader.read();
+        done = streamDone;
+        if (value) {
+          const chunk = decoder.decode(value, {stream: true});
+          out.textContent += chunk;
+          out.scrollTop = out.scrollHeight;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
