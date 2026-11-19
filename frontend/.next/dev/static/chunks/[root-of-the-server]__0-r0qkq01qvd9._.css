@@ -139,6 +139,7 @@
 @layer properties {
   @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
     *, :before, :after, ::backdrop {
+      --tw-space-y-reverse: 0;
       --tw-border-style: solid;
       --tw-leading: initial;
       --tw-font-weight: initial;
@@ -162,6 +163,13 @@
 
 @layer theme {
   :root, :host {
+    --color-red-50: #fef2f2;
+    --color-red-600: #e40014;
+    --color-red-700: #bf000f;
+    --color-blue-600: #155dfc;
+    --color-gray-100: #f3f4f6;
+    --color-gray-400: #99a1af;
+    --color-gray-900: #101828;
     --color-zinc-50: #fafafa;
     --color-zinc-400: #9f9fa9;
     --color-zinc-600: #52525c;
@@ -172,6 +180,8 @@
     --container-xs: 20rem;
     --container-md: 28rem;
     --container-3xl: 48rem;
+    --text-sm: .875rem;
+    --text-sm--line-height: calc(1.25 / .875);
     --text-base: 1rem;
     --text-base--line-height: calc(1.5 / 1);
     --text-lg: 1.125rem;
@@ -181,6 +191,9 @@
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --tracking-tight: -.025em;
+    --radius-lg: .5rem;
+    --radius-2xl: 1rem;
+    --animate-pulse: pulse 2s cubic-bezier(.4, 0, .6, 1) infinite;
     --default-transition-duration: .15s;
     --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     --default-font-family: var(--font-geist-sans);
@@ -189,6 +202,13 @@
 
   @supports (color: lab(0% 0 0)) {
     :root, :host {
+      --color-red-50: lab(96.5005% 4.18508 1.52328);
+      --color-red-600: lab(48.4493% 77.4328 61.5452);
+      --color-red-700: lab(40.4273% 67.2623 53.7441);
+      --color-blue-600: lab(44.0605% 29.0279 -86.0352);
+      --color-gray-100: lab(96.1596% -.0823438 -1.13575);
+      --color-gray-400: lab(65.9269% -.832707 -8.17473);
+      --color-gray-900: lab(8.11897% .811279 -12.254);
       --color-zinc-50: lab(98.26% 0 0);
       --color-zinc-400: lab(65.6464% 1.53497 -5.42429);
       --color-zinc-600: lab(35.1166% 1.78212 -6.1173);
@@ -450,6 +470,10 @@
     visibility: visible;
   }
 
+  .mx-auto {
+    margin-inline: auto;
+  }
+
   .block {
     display: block;
   }
@@ -474,6 +498,10 @@
     height: 100%;
   }
 
+  .h-screen {
+    height: 100vh;
+  }
+
   .min-h-full {
     min-height: 100%;
   }
@@ -494,8 +522,16 @@
     max-width: var(--container-3xl);
   }
 
+  .max-w-\[80\%\] {
+    max-width: 80%;
+  }
+
   .max-w-md {
     max-width: var(--container-md);
+  }
+
+  .max-w-none {
+    max-width: none;
   }
 
   .max-w-xs {
@@ -504,6 +540,14 @@
 
   .flex-1 {
     flex: 1;
+  }
+
+  .animate-pulse {
+    animation: var(--animate-pulse);
+  }
+
+  .resize-none {
+    resize: none;
   }
 
   .flex-col {
@@ -522,6 +566,14 @@
     justify-content: center;
   }
 
+  .justify-end {
+    justify-content: flex-end;
+  }
+
+  .justify-start {
+    justify-content: flex-start;
+  }
+
   .gap-2 {
     gap: calc(var(--spacing) * 2);
   }
@@ -534,17 +586,45 @@
     gap: calc(var(--spacing) * 6);
   }
 
+  :where(.space-y-3 > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-block-start: calc(calc(var(--spacing) * 3) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-y-reverse)));
+  }
+
+  .overflow-y-auto {
+    overflow-y: auto;
+  }
+
   .rounded {
     border-radius: .25rem;
+  }
+
+  .rounded-2xl {
+    border-radius: var(--radius-2xl);
   }
 
   .rounded-full {
     border-radius: 3.40282e38px;
   }
 
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
+  }
+
+  .border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+
+  .border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
   }
 
   .border-solid {
@@ -572,8 +652,24 @@
     }
   }
 
+  .bg-blue-600 {
+    background-color: var(--color-blue-600);
+  }
+
   .bg-foreground {
     background-color: var(--foreground);
+  }
+
+  .bg-gray-100 {
+    background-color: var(--color-gray-100);
+  }
+
+  .bg-red-50 {
+    background-color: var(--color-red-50);
+  }
+
+  .bg-red-600 {
+    background-color: var(--color-red-600);
   }
 
   .bg-white {
@@ -584,8 +680,24 @@
     background-color: var(--color-zinc-50);
   }
 
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
+  }
+
+  .p-3 {
+    padding: calc(var(--spacing) * 3);
+  }
+
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+
   .px-1\.5 {
     padding-inline: calc(var(--spacing) * 1.5);
+  }
+
+  .px-4 {
+    padding-inline: calc(var(--spacing) * 4);
   }
 
   .px-5 {
@@ -598,6 +710,10 @@
 
   .py-0\.5 {
     padding-block: calc(var(--spacing) * .5);
+  }
+
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
   }
 
   .py-32 {
@@ -631,6 +747,11 @@
     line-height: var(--tw-leading, var(--text-lg--line-height));
   }
 
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+
   .text-\[0\.9em\] {
     font-size: .9em;
   }
@@ -660,12 +781,36 @@
     letter-spacing: var(--tracking-tight);
   }
 
+  .whitespace-pre-wrap {
+    white-space: pre-wrap;
+  }
+
   .text-background {
     color: var(--background);
   }
 
   .text-black {
     color: var(--color-black);
+  }
+
+  .text-blue-600 {
+    color: var(--color-blue-600);
+  }
+
+  .text-gray-400 {
+    color: var(--color-gray-400);
+  }
+
+  .text-gray-900 {
+    color: var(--color-gray-900);
+  }
+
+  .text-red-700 {
+    color: var(--color-red-700);
+  }
+
+  .text-white {
+    color: var(--color-white);
   }
 
   .text-zinc-600 {
@@ -705,6 +850,10 @@
         background-color: color-mix(in oklab, var(--color-black) 4%, transparent);
       }
     }
+  }
+
+  .disabled\:opacity-50:disabled {
+    opacity: .5;
   }
 
   @media (min-width: 40rem) {
@@ -795,6 +944,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@property --tw-space-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+
 @property --tw-border-style {
   syntax: "*";
   inherits: false;
@@ -880,6 +1035,12 @@ body {
 @property --tw-drop-shadow-size {
   syntax: "*";
   inherits: false
+}
+
+@keyframes pulse {
+  50% {
+    opacity: .5;
+  }
 }
 
 /*# sourceMappingURL=%5Broot-of-the-server%5D__0-r0qkq01qvd9._.css.map*/

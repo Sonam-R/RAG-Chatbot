@@ -11,6 +11,17 @@ app = FastAPI(
     version="0.1.0",
 )
 
+# CORS configuration – allow requests from the Next.js dev server (port 3000/3001) and any origin during development
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # you can restrict to "http://localhost:3000", "http://localhost:3001" if desired
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Include the chat router (prefix /api is already set in chat.py)
 app.include_router(chat_router)
 
