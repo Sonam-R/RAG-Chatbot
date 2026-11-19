@@ -1,68 +1,319 @@
-{"timestamp":"00:00:02.557","source":"Server","level":"LOG","message":"- Cache Components enabled"}
-{"timestamp":"00:00:02.557","source":"Server","level":"LOG","message":"- Partial Prefetching enabled"}
-{"timestamp":"00:00:02.558","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:00:04.363","source":"Server","level":"WARN","message":"Route / is rendering with server caches disabled. For this navigation, Component Metadata in React DevTools will not accurately reflect what is statically prerenderable and runtime prefetchable. See more info here: https://nextjs.org/docs/messages/cache-bypass-in-dev"}
-{"timestamp":"00:00:05.299","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:00:05.875","source":"Browser","level":"ERROR","message":"A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>\n      <AppDevOverlayErrorBoundary globalError={[...]}>\n        <ReplaySsrOnlyErrors>\n        <DevRootHTTPAccessFallbackBoundary>\n          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>\n            <HTTPAccessFallbackErrorBoundary pathname=\"/\" notFound={<NotAllowedRootHTTPFallbackError>} ...>\n              <RedirectBoundary>\n                <RedirectErrorBoundary router={{...}}>\n                  <Head>\n                  <__next_root_layout_boundary__>\n                    <SegmentViewNode type=\"layout\" pagePath=\"layout.tsx\">\n                      <SegmentTrieNode>\n                      <link>\n                      <script>\n                      <RootLayout>\n                        <html\n                          lang=\"en\"\n+                         className=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\"\n-                         className=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\"\n                        >\n                  ...\n "}
-{"timestamp":"00:00:05.876","source":"Server","level":"ERROR","message":"[browser] \"A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\\n\\n- A server/client branch `if (typeof window !== 'undefined')`.\\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\\n- Date formatting in a user's locale which doesn't match the server.\\n- External changing data without sending a snapshot of it along with the HTML.\\n- Invalid HTML tag nesting.\\n\\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\\n\\nhttps://react.dev/link/hydration-mismatch\\n\\n  ...\\n    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>\\n      <AppDevOverlayErrorBoundary globalError={[...]}>\\n        <ReplaySsrOnlyErrors>\\n        <DevRootHTTPAccessFallbackBoundary>\\n          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>\\n            <HTTPAccessFallbackErrorBoundary pathname=\\\"/\\\" notFound={<NotAllowedRootHTTPFallbackError>} ...>\\n              <RedirectBoundary>\\n                <RedirectErrorBoundary router={{...}}>\\n                  <Head>\\n                  <__next_root_layout_boundary__>\\n                    <SegmentViewNode type=\\\"layout\\\" pagePath=\\\"layout.tsx\\\">\\n                      <SegmentTrieNode>\\n                      <link>\\n                      <script>\\n                      <RootLayout>\\n                        <html\\n                          lang=\\\"en\\\"\\n+                         className=\\\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\\\"\\n-                         className=\\\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\\\"\\n                        >\\n                  ...\\n\" \"\""}
-{"timestamp":"00:00:07.790","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:00:07.974","source":"Browser","level":"ERROR","message":"A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>\n      <AppDevOverlayErrorBoundary globalError={[...]}>\n        <ReplaySsrOnlyErrors>\n        <DevRootHTTPAccessFallbackBoundary>\n          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>\n            <HTTPAccessFallbackErrorBoundary pathname=\"/\" notFound={<NotAllowedRootHTTPFallbackError>} ...>\n              <RedirectBoundary>\n                <RedirectErrorBoundary router={{...}}>\n                  <Head>\n                  <__next_root_layout_boundary__>\n                    <SegmentViewNode type=\"layout\" pagePath=\"layout.tsx\">\n                      <SegmentTrieNode>\n                      <link>\n                      <script>\n                      <RootLayout>\n                        <html\n                          lang=\"en\"\n+                         className=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\"\n-                         className=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\"\n                        >\n                  ...\n "}
-{"timestamp":"00:00:07.976","source":"Server","level":"ERROR","message":"[browser] \"A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\\n\\n- A server/client branch `if (typeof window !== 'undefined')`.\\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\\n- Date formatting in a user's locale which doesn't match the server.\\n- External changing data without sending a snapshot of it along with the HTML.\\n- Invalid HTML tag nesting.\\n\\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\\n\\nhttps://react.dev/link/hydration-mismatch\\n\\n  ...\\n    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>\\n      <AppDevOverlayErrorBoundary globalError={[...]}>\\n        <ReplaySsrOnlyErrors>\\n        <DevRootHTTPAccessFallbackBoundary>\\n          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>\\n            <HTTPAccessFallbackErrorBoundary pathname=\\\"/\\\" notFound={<NotAllowedRootHTTPFallbackError>} ...>\\n              <RedirectBoundary>\\n                <RedirectErrorBoundary router={{...}}>\\n                  <Head>\\n                  <__next_root_layout_boundary__>\\n                    <SegmentViewNode type=\\\"layout\\\" pagePath=\\\"layout.tsx\\\">\\n                      <SegmentTrieNode>\\n                      <link>\\n                      <script>\\n                      <RootLayout>\\n                        <html\\n                          lang=\\\"en\\\"\\n+                         className=\\\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\\\"\\n-                         className=\\\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\\\"\\n                        >\\n                  ...\\n\" \"\""}
-{"timestamp":"00:00:13.836","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"conversation_id\": \"2a0801eb25064be188dd80cd779d1a41\"}"}
-{"timestamp":"00:00:13.839","source":"Browser","level":"LOG","message":"SSE event received -> {\"conversation_id\":\"2a0801eb25064be188dd80cd779d1a41\"}"}
-{"timestamp":"00:00:13.854","source":"Browser","level":"ERROR","message":"2a0801eb25064be188dd80cd779d1a41 e.conversation_id {\"conversation_id\":\"2a0801eb25064be188dd80cd779d1a41\"} \n    at useChat.useCallback[send] [as onEvent] (hooks/useChat.ts:49:23)\n    at streamChat (lib/api.ts:56:18)\n    at async useChat.useCallback[send] (hooks/useChat.ts:43:9)\n  \u001b[90m47 |\u001b[0m           onEvent: (e) => {\n  \u001b[90m48 |\u001b[0m             \u001b[36mif\u001b[0m (e.conversation_id) { console.log(\u001b[32m'SSE event received ->'\u001b[0m, e);\n\u001b[31m\u001b[1m>\u001b[0m \u001b[90m49 |\u001b[0m               console.error(e.conversation_id, \u001b[32m\"e.conversation_id\"\u001b[0m, e);\n  \u001b[90m   |\u001b[0m                       \u001b[31m\u001b[1m^\u001b[0m\n  \u001b[90m50 |\u001b[0m               setConversationId(e.conversation_id);\n  \u001b[90m51 |\u001b[0m               localStorage.setItem(\u001b[33mSTORAGE_KEY\u001b[0m, e.conversation_id);\n  \u001b[90m52 |\u001b[0m             } (hooks/useChat.ts:49:23)"}
-{"timestamp":"00:00:13.854","source":"Server","level":"ERROR","message":"[browser] \"2a0801eb25064be188dd80cd779d1a41\" \"e.conversation_id\" \"{ conversation_id: \\u001b[32m'2a0801eb25064be188dd80cd779d1a41'\\u001b[39m }\" \"\\n\\u001b[31m    at useChat.useCallback[send] [as onEvent] (hooks/useChat.ts:49:23)\\n    at streamChat (lib/api.ts:56:18)\\n    at async useChat.useCallback[send] (hooks/useChat.ts:43:9)\\u001b[39m\\n  \\u001b[90m47 |\\u001b[0m           onEvent: (e) => {\\n  \\u001b[90m48 |\\u001b[0m             \\u001b[36mif\\u001b[0m (e.conversation_id) { console.log(\\u001b[32m'SSE event received ->'\\u001b[0m, e);\\n\\u001b[31m\\u001b[1m>\\u001b[0m \\u001b[90m49 |\\u001b[0m               console.error(e.conversation_id, \\u001b[32m\\\"e.conversation_id\\\"\\u001b[0m, e);\\n  \\u001b[90m   |\\u001b[0m                       \\u001b[31m\\u001b[1m^\\u001b[0m\\n  \\u001b[90m50 |\\u001b[0m               setConversationId(e.conversation_id);\\n  \\u001b[90m51 |\\u001b[0m               localStorage.setItem(\\u001b[33mSTORAGE_KEY\\u001b[0m, e.conversation_id);\\n  \\u001b[90m52 |\\u001b[0m             }\" \"\\u001b[2m(hooks/useChat.ts:49:23)\\u001b[22m\""}
-{"timestamp":"00:00:13.855","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:00:13.855","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"Mock \"}"}
-{"timestamp":"00:00:13.855","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:00:13.855","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"response \"}"}
-{"timestamp":"00:00:13.855","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:00:13.857","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"to: \"}"}
-{"timestamp":"00:00:13.857","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:00:13.857","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"hello \"}"}
-{"timestamp":"00:00:13.857","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:00:13.857","source":"Browser","level":"LOG","message":"raw line from SSE: data: [DONE]"}
-{"timestamp":"00:00:21.323","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"conversation_id\": \"2a0801eb25064be188dd80cd779d1a41\"}"}
-{"timestamp":"00:00:21.323","source":"Browser","level":"LOG","message":"SSE event received -> {\"conversation_id\":\"2a0801eb25064be188dd80cd779d1a41\"}"}
-{"timestamp":"00:00:21.324","source":"Browser","level":"ERROR","message":"2a0801eb25064be188dd80cd779d1a41 e.conversation_id {\"conversation_id\":\"2a0801eb25064be188dd80cd779d1a41\"} \n    at useChat.useCallback[send] [as onEvent] (hooks/useChat.ts:49:23)\n    at streamChat (lib/api.ts:56:18)\n    at async useChat.useCallback[send] (hooks/useChat.ts:43:9)\n  \u001b[90m47 |\u001b[0m           onEvent: (e) => {\n  \u001b[90m48 |\u001b[0m             \u001b[36mif\u001b[0m (e.conversation_id) { console.log(\u001b[32m'SSE event received ->'\u001b[0m, e);\n\u001b[31m\u001b[1m>\u001b[0m \u001b[90m49 |\u001b[0m               console.error(e.conversation_id, \u001b[32m\"e.conversation_id\"\u001b[0m, e);\n  \u001b[90m   |\u001b[0m                       \u001b[31m\u001b[1m^\u001b[0m\n  \u001b[90m50 |\u001b[0m               setConversationId(e.conversation_id);\n  \u001b[90m51 |\u001b[0m               localStorage.setItem(\u001b[33mSTORAGE_KEY\u001b[0m, e.conversation_id);\n  \u001b[90m52 |\u001b[0m             } (hooks/useChat.ts:49:23)"}
-{"timestamp":"00:00:21.324","source":"Server","level":"ERROR","message":"[browser] \"2a0801eb25064be188dd80cd779d1a41\" \"e.conversation_id\" \"{ conversation_id: \\u001b[32m'2a0801eb25064be188dd80cd779d1a41'\\u001b[39m }\" \"\\n\\u001b[31m    at useChat.useCallback[send] [as onEvent] (hooks/useChat.ts:49:23)\\n    at streamChat (lib/api.ts:56:18)\\n    at async useChat.useCallback[send] (hooks/useChat.ts:43:9)\\u001b[39m\\n  \\u001b[90m47 |\\u001b[0m           onEvent: (e) => {\\n  \\u001b[90m48 |\\u001b[0m             \\u001b[36mif\\u001b[0m (e.conversation_id) { console.log(\\u001b[32m'SSE event received ->'\\u001b[0m, e);\\n\\u001b[31m\\u001b[1m>\\u001b[0m \\u001b[90m49 |\\u001b[0m               console.error(e.conversation_id, \\u001b[32m\\\"e.conversation_id\\\"\\u001b[0m, e);\\n  \\u001b[90m   |\\u001b[0m                       \\u001b[31m\\u001b[1m^\\u001b[0m\\n  \\u001b[90m50 |\\u001b[0m               setConversationId(e.conversation_id);\\n  \\u001b[90m51 |\\u001b[0m               localStorage.setItem(\\u001b[33mSTORAGE_KEY\\u001b[0m, e.conversation_id);\\n  \\u001b[90m52 |\\u001b[0m             }\" \"\\u001b[2m(hooks/useChat.ts:49:23)\\u001b[22m\""}
-{"timestamp":"00:00:21.325","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:00:21.325","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"Mock \"}"}
-{"timestamp":"00:00:21.325","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:00:21.344","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"response \"}"}
-{"timestamp":"00:00:21.344","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:00:21.344","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"to: \"}"}
-{"timestamp":"00:00:21.344","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:00:21.355","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"there \"}"}
-{"timestamp":"00:00:21.355","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:00:21.355","source":"Browser","level":"LOG","message":"raw line from SSE: data: [DONE]"}
-{"timestamp":"00:01:31.899","source":"Server","level":"LOG","message":"✓ Compiled in 921ms"}
-{"timestamp":"00:01:36.510","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:01:36.911","source":"Browser","level":"ERROR","message":"A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>\n      <AppDevOverlayErrorBoundary globalError={[...]}>\n        <ReplaySsrOnlyErrors>\n        <DevRootHTTPAccessFallbackBoundary>\n          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>\n            <HTTPAccessFallbackErrorBoundary pathname=\"/\" notFound={<NotAllowedRootHTTPFallbackError>} ...>\n              <RedirectBoundary>\n                <RedirectErrorBoundary router={{...}}>\n                  <Head>\n                  <__next_root_layout_boundary__>\n                    <SegmentViewNode type=\"layout\" pagePath=\"layout.tsx\">\n                      <SegmentTrieNode>\n                      <link>\n                      <script>\n                      <RootLayout>\n                        <html\n                          lang=\"en\"\n+                         className=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\"\n-                         className=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\"\n                        >\n                  ...\n "}
-{"timestamp":"00:01:36.911","source":"Server","level":"ERROR","message":"[browser] \"A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\\n\\n- A server/client branch `if (typeof window !== 'undefined')`.\\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\\n- Date formatting in a user's locale which doesn't match the server.\\n- External changing data without sending a snapshot of it along with the HTML.\\n- Invalid HTML tag nesting.\\n\\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\\n\\nhttps://react.dev/link/hydration-mismatch\\n\\n  ...\\n    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>\\n      <AppDevOverlayErrorBoundary globalError={[...]}>\\n        <ReplaySsrOnlyErrors>\\n        <DevRootHTTPAccessFallbackBoundary>\\n          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>\\n            <HTTPAccessFallbackErrorBoundary pathname=\\\"/\\\" notFound={<NotAllowedRootHTTPFallbackError>} ...>\\n              <RedirectBoundary>\\n                <RedirectErrorBoundary router={{...}}>\\n                  <Head>\\n                  <__next_root_layout_boundary__>\\n                    <SegmentViewNode type=\\\"layout\\\" pagePath=\\\"layout.tsx\\\">\\n                      <SegmentTrieNode>\\n                      <link>\\n                      <script>\\n                      <RootLayout>\\n                        <html\\n                          lang=\\\"en\\\"\\n+                         className=\\\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\\\"\\n-                         className=\\\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\\\"\\n                        >\\n                  ...\\n\" \"\""}
-{"timestamp":"00:01:40.727","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"conversation_id\": \"6ffd497bef8a4f00b0402393c0913bdb\"}"}
-{"timestamp":"00:01:40.727","source":"Browser","level":"LOG","message":"SSE event received -> {\"conversation_id\":\"6ffd497bef8a4f00b0402393c0913bdb\"}"}
-{"timestamp":"00:01:40.728","source":"Browser","level":"LOG","message":"6ffd497bef8a4f00b0402393c0913bdb e.conversation_id {\"conversation_id\":\"6ffd497bef8a4f00b0402393c0913bdb\"}"}
-{"timestamp":"00:01:40.728","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:01:40.728","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"Mock \"}"}
-{"timestamp":"00:01:40.728","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:01:40.728","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"response \"}"}
-{"timestamp":"00:01:40.728","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:01:40.745","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"to: \"}"}
-{"timestamp":"00:01:40.745","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:01:40.745","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"hello \"}"}
-{"timestamp":"00:01:40.745","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:01:40.745","source":"Browser","level":"LOG","message":"raw line from SSE: data: [DONE]"}
-{"timestamp":"00:02:11.574","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"conversation_id\": \"6ffd497bef8a4f00b0402393c0913bdb\"}"}
-{"timestamp":"00:02:11.574","source":"Browser","level":"LOG","message":"SSE event received -> {\"conversation_id\":\"6ffd497bef8a4f00b0402393c0913bdb\"}"}
-{"timestamp":"00:02:11.574","source":"Browser","level":"LOG","message":"6ffd497bef8a4f00b0402393c0913bdb e.conversation_id {\"conversation_id\":\"6ffd497bef8a4f00b0402393c0913bdb\"}"}
-{"timestamp":"00:02:11.574","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:02:11.590","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"Mock \"}"}
-{"timestamp":"00:02:11.590","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:02:11.609","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"response \"}"}
-{"timestamp":"00:02:11.609","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:02:11.609","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"to: \"}"}
-{"timestamp":"00:02:11.610","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:02:11.622","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"how \"}"}
-{"timestamp":"00:02:11.622","source":"Browser","level":"LOG","message":"raw line from SSE: "}
-{"timestamp":"00:02:11.622","source":"Browser","level":"LOG","message":"raw line from SSE: data: [DONE]"}
+{"timestamp":"00:00:01.526","source":"Server","level":"LOG","message":"- Cache Components enabled"}
+{"timestamp":"00:00:01.526","source":"Server","level":"LOG","message":"- Partial Prefetching enabled"}
+{"timestamp":"00:00:01.526","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:04.214","source":"Server","level":"WARN","message":"Route / is rendering with server caches disabled. For this navigation, Component Metadata in React DevTools will not accurately reflect what is statically prerenderable and runtime prefetchable. See more info here: https://nextjs.org/docs/messages/cache-bypass-in-dev"}
+{"timestamp":"00:00:05.041","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:00:15.602","source":"Browser","level":"ERROR","message":"A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>\n      <AppDevOverlayErrorBoundary globalError={[...]}>\n        <ReplaySsrOnlyErrors>\n        <DevRootHTTPAccessFallbackBoundary>\n          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>\n            <HTTPAccessFallbackErrorBoundary pathname=\"/\" notFound={<NotAllowedRootHTTPFallbackError>} ...>\n              <RedirectBoundary>\n                <RedirectErrorBoundary router={{...}}>\n                  <Head>\n                  <__next_root_layout_boundary__>\n                    <SegmentViewNode type=\"layout\" pagePath=\"layout.tsx\">\n                      <SegmentTrieNode>\n                      <link>\n                      <script>\n                      <RootLayout>\n                        <html\n                          lang=\"en\"\n+                         className=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\"\n-                         className=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\"\n                        >\n                  ...\n "}
+{"timestamp":"00:00:15.603","source":"Server","level":"ERROR","message":"[browser] \"A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\\n\\n- A server/client branch `if (typeof window !== 'undefined')`.\\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\\n- Date formatting in a user's locale which doesn't match the server.\\n- External changing data without sending a snapshot of it along with the HTML.\\n- Invalid HTML tag nesting.\\n\\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\\n\\nhttps://react.dev/link/hydration-mismatch\\n\\n  ...\\n    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>\\n      <AppDevOverlayErrorBoundary globalError={[...]}>\\n        <ReplaySsrOnlyErrors>\\n        <DevRootHTTPAccessFallbackBoundary>\\n          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>\\n            <HTTPAccessFallbackErrorBoundary pathname=\\\"/\\\" notFound={<NotAllowedRootHTTPFallbackError>} ...>\\n              <RedirectBoundary>\\n                <RedirectErrorBoundary router={{...}}>\\n                  <Head>\\n                  <__next_root_layout_boundary__>\\n                    <SegmentViewNode type=\\\"layout\\\" pagePath=\\\"layout.tsx\\\">\\n                      <SegmentTrieNode>\\n                      <link>\\n                      <script>\\n                      <RootLayout>\\n                        <html\\n                          lang=\\\"en\\\"\\n+                         className=\\\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\\\"\\n-                         className=\\\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\\\"\\n                        >\\n                  ...\\n\" \"\""}
+{"timestamp":"00:00:18.837","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:00:19.050","source":"Browser","level":"ERROR","message":"A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>\n      <AppDevOverlayErrorBoundary globalError={[...]}>\n        <ReplaySsrOnlyErrors>\n        <DevRootHTTPAccessFallbackBoundary>\n          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>\n            <HTTPAccessFallbackErrorBoundary pathname=\"/\" notFound={<NotAllowedRootHTTPFallbackError>} ...>\n              <RedirectBoundary>\n                <RedirectErrorBoundary router={{...}}>\n                  <Head>\n                  <__next_root_layout_boundary__>\n                    <SegmentViewNode type=\"layout\" pagePath=\"layout.tsx\">\n                      <SegmentTrieNode>\n                      <link>\n                      <script>\n                      <RootLayout>\n                        <html\n                          lang=\"en\"\n+                         className=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\"\n-                         className=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\"\n                        >\n                  ...\n "}
+{"timestamp":"00:00:19.051","source":"Server","level":"ERROR","message":"[browser] \"A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:\\n\\n- A server/client branch `if (typeof window !== 'undefined')`.\\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\\n- Date formatting in a user's locale which doesn't match the server.\\n- External changing data without sending a snapshot of it along with the HTML.\\n- Invalid HTML tag nesting.\\n\\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\\n\\nhttps://react.dev/link/hydration-mismatch\\n\\n  ...\\n    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>\\n      <AppDevOverlayErrorBoundary globalError={[...]}>\\n        <ReplaySsrOnlyErrors>\\n        <DevRootHTTPAccessFallbackBoundary>\\n          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>\\n            <HTTPAccessFallbackErrorBoundary pathname=\\\"/\\\" notFound={<NotAllowedRootHTTPFallbackError>} ...>\\n              <RedirectBoundary>\\n                <RedirectErrorBoundary router={{...}}>\\n                  <Head>\\n                  <__next_root_layout_boundary__>\\n                    <SegmentViewNode type=\\\"layout\\\" pagePath=\\\"layout.tsx\\\">\\n                      <SegmentTrieNode>\\n                      <link>\\n                      <script>\\n                      <RootLayout>\\n                        <html\\n                          lang=\\\"en\\\"\\n+                         className=\\\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\\\"\\n-                         className=\\\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__varia...\\\"\\n                        >\\n                  ...\\n\" \"\""}
+{"timestamp":"00:00:59.633","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"conversation_id\": \"e3f9954ca03f4c75907f703a95506e3c\"}"}
+{"timestamp":"00:00:59.633","source":"Browser","level":"LOG","message":"SSE event received -> {\"conversation_id\":\"e3f9954ca03f4c75907f703a95506e3c\"}"}
+{"timestamp":"00:00:59.633","source":"Browser","level":"LOG","message":"e3f9954ca03f4c75907f703a95506e3c e.conversation_id {\"conversation_id\":\"e3f9954ca03f4c75907f703a95506e3c\"}"}
+{"timestamp":"00:00:59.633","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:20.073","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"I\"}"}
+{"timestamp":"00:01:20.074","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:20.140","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" don\"}"}
+{"timestamp":"00:01:20.140","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:20.355","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"'t\"}"}
+{"timestamp":"00:01:20.355","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:20.687","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" have\"}"}
+{"timestamp":"00:01:20.687","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:20.891","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" any\"}"}
+{"timestamp":"00:01:20.891","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:21.092","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" information\"}"}
+{"timestamp":"00:01:21.092","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:21.300","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" about\"}"}
+{"timestamp":"00:01:21.300","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:21.508","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" your\"}"}
+{"timestamp":"00:01:21.508","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:21.713","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" name\"}"}
+{"timestamp":"00:01:21.713","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:21.935","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \".\"}"}
+{"timestamp":"00:01:21.935","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:22.139","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" This\"}"}
+{"timestamp":"00:01:22.139","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:22.350","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" is\"}"}
+{"timestamp":"00:01:22.351","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:22.555","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" the\"}"}
+{"timestamp":"00:01:22.555","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:22.747","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" beginning\"}"}
+{"timestamp":"00:01:22.747","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:22.951","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" of\"}"}
+{"timestamp":"00:01:22.951","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:23.166","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" our\"}"}
+{"timestamp":"00:01:23.166","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:23.390","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" conversation\"}"}
+{"timestamp":"00:01:23.390","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:23.599","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \",\"}"}
+{"timestamp":"00:01:23.599","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:23.802","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" and\"}"}
+{"timestamp":"00:01:23.802","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:24.011","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" I\"}"}
+{"timestamp":"00:01:24.011","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:24.214","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" don\"}"}
+{"timestamp":"00:01:24.214","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:24.417","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"'t\"}"}
+{"timestamp":"00:01:24.417","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:24.608","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" have\"}"}
+{"timestamp":"00:01:24.608","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:24.819","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" any\"}"}
+{"timestamp":"00:01:24.819","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:25.139","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" prior\"}"}
+{"timestamp":"00:01:25.139","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:25.343","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" knowledge\"}"}
+{"timestamp":"00:01:25.343","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:25.534","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" about\"}"}
+{"timestamp":"00:01:25.534","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:25.736","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" you\"}"}
+{"timestamp":"00:01:25.736","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:25.935","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \".\"}"}
+{"timestamp":"00:01:25.935","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:26.136","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" Would\"}"}
+{"timestamp":"00:01:26.136","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:26.332","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" you\"}"}
+{"timestamp":"00:01:26.332","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:26.519","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" like\"}"}
+{"timestamp":"00:01:26.519","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:26.714","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" to\"}"}
+{"timestamp":"00:01:26.714","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:26.913","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" introduce\"}"}
+{"timestamp":"00:01:26.913","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:27.100","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" yourself\"}"}
+{"timestamp":"00:01:27.100","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:27.296","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"?\"}"}
+{"timestamp":"00:01:27.296","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:27.495","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" I\"}"}
+{"timestamp":"00:01:27.495","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:27.681","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" can\"}"}
+{"timestamp":"00:01:27.681","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:27.894","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" also\"}"}
+{"timestamp":"00:01:27.894","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:28.095","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" help\"}"}
+{"timestamp":"00:01:28.095","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:28.281","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" you\"}"}
+{"timestamp":"00:01:28.281","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:28.470","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" come\"}"}
+{"timestamp":"00:01:28.470","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:28.664","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" up\"}"}
+{"timestamp":"00:01:28.664","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:28.851","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" with\"}"}
+{"timestamp":"00:01:28.851","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:29.045","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" a\"}"}
+{"timestamp":"00:01:29.046","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:29.243","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" name\"}"}
+{"timestamp":"00:01:29.243","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:29.431","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" if\"}"}
+{"timestamp":"00:01:29.431","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:29.628","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" you\"}"}
+{"timestamp":"00:01:29.628","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:29.825","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"'d\"}"}
+{"timestamp":"00:01:29.825","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:30.028","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" like\"}"}
+{"timestamp":"00:01:30.028","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:30.220","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"!\"}"}
+{"timestamp":"00:01:30.220","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:01:30.416","source":"Browser","level":"LOG","message":"raw line from SSE: data: [DONE]"}
+{"timestamp":"00:02:28.800","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"conversation_id\": \"bc97eec4e9374069a533e6343cf14713\"}"}
+{"timestamp":"00:02:28.801","source":"Browser","level":"LOG","message":"SSE event received -> {\"conversation_id\":\"bc97eec4e9374069a533e6343cf14713\"}"}
+{"timestamp":"00:02:28.802","source":"Browser","level":"LOG","message":"bc97eec4e9374069a533e6343cf14713 e.conversation_id {\"conversation_id\":\"bc97eec4e9374069a533e6343cf14713\"}"}
+{"timestamp":"00:02:28.802","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:29.572","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"Nice\"}"}
+{"timestamp":"00:02:29.572","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:29.787","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" to\"}"}
+{"timestamp":"00:02:29.787","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:30.001","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" meet\"}"}
+{"timestamp":"00:02:30.001","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:30.204","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" you\"}"}
+{"timestamp":"00:02:30.204","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:30.401","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \",\"}"}
+{"timestamp":"00:02:30.401","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:30.608","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" Son\"}"}
+{"timestamp":"00:02:30.608","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:30.818","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"am\"}"}
+{"timestamp":"00:02:30.818","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:31.019","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"!\"}"}
+{"timestamp":"00:02:31.019","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:31.219","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" Is\"}"}
+{"timestamp":"00:02:31.219","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:31.436","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" there\"}"}
+{"timestamp":"00:02:31.436","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:31.625","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" anything\"}"}
+{"timestamp":"00:02:31.626","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:31.836","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" I\"}"}
+{"timestamp":"00:02:31.836","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:32.029","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" can\"}"}
+{"timestamp":"00:02:32.029","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:32.222","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" help\"}"}
+{"timestamp":"00:02:32.222","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:32.427","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" you\"}"}
+{"timestamp":"00:02:32.427","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:32.622","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" with\"}"}
+{"timestamp":"00:02:32.622","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:32.871","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" today\"}"}
+{"timestamp":"00:02:32.877","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:33.151","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"?\"}"}
+{"timestamp":"00:02:33.151","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:33.339","source":"Browser","level":"LOG","message":"raw line from SSE: data: [DONE]"}
+{"timestamp":"00:02:40.267","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"conversation_id\": \"bc97eec4e9374069a533e6343cf14713\"}"}
+{"timestamp":"00:02:40.267","source":"Browser","level":"LOG","message":"SSE event received -> {\"conversation_id\":\"bc97eec4e9374069a533e6343cf14713\"}"}
+{"timestamp":"00:02:40.268","source":"Browser","level":"LOG","message":"bc97eec4e9374069a533e6343cf14713 e.conversation_id {\"conversation_id\":\"bc97eec4e9374069a533e6343cf14713\"}"}
+{"timestamp":"00:02:40.268","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:41.018","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"Your\"}"}
+{"timestamp":"00:02:41.018","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:41.209","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" name\"}"}
+{"timestamp":"00:02:41.209","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:41.411","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" is\"}"}
+{"timestamp":"00:02:41.411","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:41.678","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" Son\"}"}
+{"timestamp":"00:02:41.678","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:41.875","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"am\"}"}
+{"timestamp":"00:02:41.875","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:42.073","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"!\"}"}
+{"timestamp":"00:02:42.073","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:02:42.272","source":"Browser","level":"LOG","message":"raw line from SSE: data: [DONE]"}
+{"timestamp":"00:03:09.699","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"conversation_id\": \"73bd6e53b4664d8bb3bd1aa9a135ef57\"}"}
+{"timestamp":"00:03:09.700","source":"Browser","level":"LOG","message":"SSE event received -> {\"conversation_id\":\"73bd6e53b4664d8bb3bd1aa9a135ef57\"}"}
+{"timestamp":"00:03:09.700","source":"Browser","level":"LOG","message":"73bd6e53b4664d8bb3bd1aa9a135ef57 e.conversation_id {\"conversation_id\":\"73bd6e53b4664d8bb3bd1aa9a135ef57\"}"}
+{"timestamp":"00:03:09.700","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:10.335","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"I\"}"}
+{"timestamp":"00:03:10.335","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:10.529","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" don\"}"}
+{"timestamp":"00:03:10.529","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:10.716","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"'t\"}"}
+{"timestamp":"00:03:10.716","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:10.904","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" actually\"}"}
+{"timestamp":"00:03:10.904","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:11.095","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" know\"}"}
+{"timestamp":"00:03:11.095","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:11.309","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" your\"}"}
+{"timestamp":"00:03:11.309","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:11.575","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" name\"}"}
+{"timestamp":"00:03:11.575","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:11.734","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \".\"}"}
+{"timestamp":"00:03:11.734","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:11.935","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" I\"}"}
+{"timestamp":"00:03:11.935","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:12.132","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"'m\"}"}
+{"timestamp":"00:03:12.132","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:12.320","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" a\"}"}
+{"timestamp":"00:03:12.320","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:12.512","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" helpful\"}"}
+{"timestamp":"00:03:12.512","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:12.774","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" assistant\"}"}
+{"timestamp":"00:03:12.774","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:12.965","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \",\"}"}
+{"timestamp":"00:03:12.965","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:13.161","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" but\"}"}
+{"timestamp":"00:03:13.161","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:13.356","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" I\"}"}
+{"timestamp":"00:03:13.356","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:13.554","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" don\"}"}
+{"timestamp":"00:03:13.554","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:13.766","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"'t\"}"}
+{"timestamp":"00:03:13.766","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:13.966","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" have\"}"}
+{"timestamp":"00:03:13.967","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:14.151","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" any\"}"}
+{"timestamp":"00:03:14.151","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:14.348","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" prior\"}"}
+{"timestamp":"00:03:14.348","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:14.538","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" knowledge\"}"}
+{"timestamp":"00:03:14.538","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:14.727","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" or\"}"}
+{"timestamp":"00:03:14.727","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:14.926","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" information\"}"}
+{"timestamp":"00:03:14.927","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:15.121","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" about\"}"}
+{"timestamp":"00:03:15.121","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:15.311","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" you\"}"}
+{"timestamp":"00:03:15.311","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:15.509","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \".\"}"}
+{"timestamp":"00:03:15.509","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:15.706","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" Would\"}"}
+{"timestamp":"00:03:15.706","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:15.894","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" you\"}"}
+{"timestamp":"00:03:15.894","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:16.089","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" like\"}"}
+{"timestamp":"00:03:16.089","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:16.283","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" to\"}"}
+{"timestamp":"00:03:16.284","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:16.482","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" introduce\"}"}
+{"timestamp":"00:03:16.483","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:16.681","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" yourself\"}"}
+{"timestamp":"00:03:16.681","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:16.877","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"?\"}"}
+{"timestamp":"00:03:16.877","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:17.063","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" I\"}"}
+{"timestamp":"00:03:17.063","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:17.252","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" can\"}"}
+{"timestamp":"00:03:17.252","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:17.443","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" help\"}"}
+{"timestamp":"00:03:17.443","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:17.631","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" answer\"}"}
+{"timestamp":"00:03:17.631","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:17.831","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" any\"}"}
+{"timestamp":"00:03:17.831","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:18.027","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" questions\"}"}
+{"timestamp":"00:03:18.027","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:18.215","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" or\"}"}
+{"timestamp":"00:03:18.215","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:18.403","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" provide\"}"}
+{"timestamp":"00:03:18.404","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:18.593","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" assistance\"}"}
+{"timestamp":"00:03:18.593","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:18.809","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" once\"}"}
+{"timestamp":"00:03:18.809","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:19.007","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" we\"}"}
+{"timestamp":"00:03:19.008","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:19.205","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" get\"}"}
+{"timestamp":"00:03:19.205","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:19.394","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" to\"}"}
+{"timestamp":"00:03:19.394","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:19.587","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" know\"}"}
+{"timestamp":"00:03:19.587","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:19.784","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" each\"}"}
+{"timestamp":"00:03:19.784","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:19.972","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" other\"}"}
+{"timestamp":"00:03:19.972","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:20.171","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" better\"}"}
+{"timestamp":"00:03:20.171","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:20.368","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"!\"}"}
+{"timestamp":"00:03:20.368","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:20.552","source":"Browser","level":"LOG","message":"raw line from SSE: data: [DONE]"}
+{"timestamp":"00:03:49.100","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"conversation_id\": \"73bd6e53b4664d8bb3bd1aa9a135ef57\"}"}
+{"timestamp":"00:03:49.102","source":"Browser","level":"LOG","message":"SSE event received -> {\"conversation_id\":\"73bd6e53b4664d8bb3bd1aa9a135ef57\"}"}
+{"timestamp":"00:03:49.103","source":"Browser","level":"LOG","message":"73bd6e53b4664d8bb3bd1aa9a135ef57 e.conversation_id {\"conversation_id\":\"73bd6e53b4664d8bb3bd1aa9a135ef57\"}"}
+{"timestamp":"00:03:49.103","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:49.853","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"Nice\"}"}
+{"timestamp":"00:03:49.853","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:50.053","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" to\"}"}
+{"timestamp":"00:03:50.053","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:50.270","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" meet\"}"}
+{"timestamp":"00:03:50.270","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:50.468","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" you\"}"}
+{"timestamp":"00:03:50.468","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:50.658","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \",\"}"}
+{"timestamp":"00:03:50.659","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:50.864","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" Son\"}"}
+{"timestamp":"00:03:50.864","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:51.068","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"am\"}"}
+{"timestamp":"00:03:51.068","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:51.258","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"!\"}"}
+{"timestamp":"00:03:51.258","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:51.472","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" How\"}"}
+{"timestamp":"00:03:51.472","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:51.671","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" can\"}"}
+{"timestamp":"00:03:51.671","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:51.866","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" I\"}"}
+{"timestamp":"00:03:51.866","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:52.063","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" assist\"}"}
+{"timestamp":"00:03:52.063","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:52.271","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" you\"}"}
+{"timestamp":"00:03:52.271","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:52.465","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \" today\"}"}
+{"timestamp":"00:03:52.465","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:52.671","source":"Browser","level":"LOG","message":"raw line from SSE: data: {\"token\": \"?\"}"}
+{"timestamp":"00:03:52.672","source":"Browser","level":"LOG","message":"raw line from SSE: "}
+{"timestamp":"00:03:52.869","source":"Browser","level":"LOG","message":"raw line from SSE: data: [DONE]"}
