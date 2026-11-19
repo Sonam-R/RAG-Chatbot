@@ -377,6 +377,8 @@ function useChat() {
                 signal: controller.signal,
                 onEvent: (e)=>{
                     if (e.conversation_id) {
+                        console.log('SSE event received ->', e);
+                        console.log(e.conversation_id, "e.conversation_id", e);
                         setConversationId(e.conversation_id);
                         localStorage.setItem(STORAGE_KEY, e.conversation_id);
                     }
@@ -440,7 +442,8 @@ async function streamChat(params) {
     const res = await fetch(`${API_URL}/api/chat`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Accept": "text/event-stream"
         },
         body: JSON.stringify({
             message: params.message,
@@ -462,6 +465,7 @@ async function streamChat(params) {
         const lines = buffer.split("\n");
         buffer = lines.pop() ?? ""; // keep incomplete line
         for (const raw of lines){
+            console.log('raw line from SSE:', raw);
             const line = raw.trim();
             if (!line) continue;
             if (line.startsWith("data:")) {

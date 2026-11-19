@@ -46,6 +46,8 @@ export function useChat() {
           signal: controller.signal,
           onEvent: (e) => {
             if (e.conversation_id) {
+              console.log('SSE event received ->', e);
+              console.log(e.conversation_id, "e.conversation_id", e);
               setConversationId(e.conversation_id);
               localStorage.setItem(STORAGE_KEY, e.conversation_id);
             }

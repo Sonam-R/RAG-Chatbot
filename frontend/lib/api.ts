@@ -19,7 +19,10 @@ export async function streamChat(params: {
 }) {
   const res = await fetch(`${API_URL}/api/chat`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "text/event-stream",
+    },
     body: JSON.stringify({
       message: params.message,
       conversation_id: params.conversationId,
@@ -39,6 +42,7 @@ export async function streamChat(params: {
     const lines = buffer.split("\n");
     buffer = lines.pop() ?? ""; // keep incomplete line
     for (const raw of lines) {
+      console.log('raw line from SSE:', raw);
       const line = raw.trim();
       if (!line) continue;
       if (line.startsWith("data:")) {
