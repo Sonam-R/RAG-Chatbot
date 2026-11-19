@@ -23,7 +23,8 @@ app.add_middleware(
 )
 
 # Include the chat router (prefix /api is already set in chat.py)
-app.include_router(chat_router)
+from app.api.documents import router as documents_router
+app.include_router(documents_router)
 
 @app.get("/health")
 async def health():
