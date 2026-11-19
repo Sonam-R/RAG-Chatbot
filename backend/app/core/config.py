@@ -10,6 +10,12 @@ class Settings(BaseSettings):
     openai_api_key: str = ""
     use_ollama: bool = False
     ollama_base_url: str = "http://127.0.0.1:11434/v1"
+    # RAG‑specific configuration
+    chroma_path: str = "./chroma_data"
+    max_upload_mb: int = 10
+    chunk_size: int = 500
+    chunk_overlap: int = 50
+    top_k: int = 5
 
     model_config = SettingsConfigDict(env_file=".env")
 
