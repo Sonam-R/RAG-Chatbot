@@ -1,12 +1,47 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
-export type ChatMessage = { role: "user" | "assistant"; content: string };
+export type Source = {
+  n: number;
+  filename: string;
+  page: number;
+  snippet: string;
+  score: number;
+};
+
+export type Document = {
+  id: string;
+  filename: string;
+  pages: number;
+  chunks: number;
+  created_at: string;
+};
+
+export type ChatMessage = {
+  role: "user" | "assistant";
+  content: string;
+  sources?: Source[] | null;
+};
+
 export type StreamEvent = {
   conversation_id?: string;
   token?: string;
   error?: string;
   done?: boolean;
+  sources?: Source[];
 };
+
+async function apiError(res: Response): Promise<Error> {
+  try {
+    const body: unknown = await res.json();
+    if (body && typeof body === "object" && "detail" in body) {
+      const detail = (body as { detail: unknown }).detail;
+      if (typeof detail === "string") return new Error(detail);
+    }
+  } catch {
+    // response was not JSON
+  }
+  return new Error(`Request failed (${res.status})`);
+}
 
 /**
  * Stream a chat request to the backend. Calls `onEvent` for each SSE data chunk.
@@ -14,24 +49,26 @@ export type StreamEvent = {
 export async function streamChat(params: {
   message: string;
   conversationId: string | null;
+  useDocuments: boolean;
   signal?: AbortSignal;
   onEvent: (e: StreamEvent) => void;
+  onSources?: (sources: Source[]) => void;
 }) {
   const res = await fetch(`${API_URL}/api/chat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "text/event-stream",
+      Accept: "text/event-stream",
     },
     body: JSON.stringify({
       message: params.message,
       conversation_id: params.conversationId,
+      use_documents: params.useDocuments,
     }),
     signal: params.signal,
   });
-  if (!res.ok || !res.body) throw new Error(`Request failed (${res.status})`);
+  if (!res.ok || !res.body) throw await apiError(res);
 
-  // Parse Server‑Sent Events stream
   const decoder = new TextDecoder();
   const reader = res.body.getReader();
   let buffer = "";
@@ -40,9 +77,8 @@ export async function streamChat(params: {
     if (done) break;
     buffer += decoder.decode(value, { stream: true });
     const lines = buffer.split("\n");
-    buffer = lines.pop() ?? ""; // keep incomplete line
+    buffer = lines.pop() ?? "";
     for (const raw of lines) {
-      console.log('raw line from SSE:', raw);
       const line = raw.trim();
       if (!line) continue;
       if (line.startsWith("data:")) {
@@ -52,21 +88,21 @@ export async function streamChat(params: {
           return;
         }
         try {
-          const data: StreamEvent = JSON.parse(payload);
+          const data = JSON.parse(payload) as StreamEvent;
+          if (Array.isArray(data.sources)) {
+            params.onSources?.(data.sources);
+            continue;
+          }
           params.onEvent(data);
-        } catch (e) {
-          // ignore malformed line
+        } catch {
+          // skip malformed SSE payloads
         }
       }
     }
   }
-  // End of stream without explicit [DONE]
   params.onEvent({ done: true });
 }
 
-/**
- * Fetch a conversation by ID. Returns null if the conversation does not exist.
- */
 export async function fetchConversation(id: string) {
   const res = await fetch(`${API_URL}/api/conversations/${id}`);
   if (res.status === 404) return null;
@@ -76,4 +112,35 @@ export async function fetchConversation(id: string) {
     title: string;
     messages: ChatMessage[];
   };
+}
+
+export async function uploadDocument(file: File): Promise<Document> {
+  const body = new FormData();
+  body.append("file", file);
+  const res = await fetch(`${API_URL}/api/documents`, { method: "POST", body });
+  if (!res.ok) throw await apiError(res);
+  const data = (await res.json()) as {
+    doc_id: string;
+    filename: string;
+    pages: number;
+    chunks: number;
+  };
+  return {
+    id: data.doc_id,
+    filename: data.filename,
+    pages: data.pages,
+    chunks: data.chunks,
+    created_at: new Date().toISOString(),
+  };
+}
+
+export async function listDocuments(): Promise<Document[]> {
+  const res = await fetch(`${API_URL}/api/documents`);
+  if (!res.ok) throw await apiError(res);
+  return (await res.json()) as Document[];
+}
+
+export async function deleteDocument(id: string): Promise<void> {
+  const res = await fetch(`${API_URL}/api/documents/${id}`, { method: "DELETE" });
+  if (!res.ok) throw await apiError(res);
 }

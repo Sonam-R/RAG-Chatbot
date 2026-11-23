@@ -9,9 +9,9 @@ export function useChat() {
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [useDocuments, setUseDocuments] = useState(true);
   const abortRef = useRef<AbortController | null>(null);
 
-  // Restore on refresh
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) return;
@@ -33,7 +33,7 @@ export function useChat() {
       setMessages((prev) => [
         ...prev,
         { role: "user", content: text },
-        { role: "assistant", content: "" },
+        { role: "assistant", content: "", sources: null },
       ]);
 
       const controller = new AbortController();
@@ -43,11 +43,19 @@ export function useChat() {
         await streamChat({
           message: text,
           conversationId,
+          useDocuments,
           signal: controller.signal,
+          onSources: (sources) => {
+            setMessages((prev) => {
+              const copy = [...prev];
+              const last = copy[copy.length - 1];
+              if (!last || last.role !== "assistant") return prev;
+              copy[copy.length - 1] = { ...last, sources };
+              return copy;
+            });
+          },
           onEvent: (e) => {
             if (e.conversation_id) {
-              console.log('SSE event received ->', e);
-              console.log(e.conversation_id, "e.conversation_id", e);
               setConversationId(e.conversation_id);
               localStorage.setItem(STORAGE_KEY, e.conversation_id);
             }
@@ -72,7 +80,7 @@ export function useChat() {
         abortRef.current = null;
       }
     },
-    [conversationId, isLoading]
+    [conversationId, isLoading, useDocuments]
   );
 
   const stop = useCallback(() => abortRef.current?.abort(), []);
@@ -84,5 +92,14 @@ export function useChat() {
     setError(null);
   }, []);
 
-  return { messages, isLoading, error, send, stop, newChat };
+  return {
+    messages,
+    isLoading,
+    error,
+    send,
+    stop,
+    newChat,
+    useDocuments,
+    setUseDocuments,
+  };
 }
