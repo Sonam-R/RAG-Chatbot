@@ -3,7 +3,13 @@ import { useEffect, useRef } from "react";
 import { ChatMessage } from "@/lib/api";
 import MessageBubble from "./MessageBubble";
 
-export default function MessageList({ messages }: { messages: ChatMessage[] }) {
+export default function MessageList({
+  messages,
+  isLoading,
+}: {
+  messages: ChatMessage[];
+  isLoading: boolean;
+}) {
   const endRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -19,7 +25,11 @@ export default function MessageList({ messages }: { messages: ChatMessage[] }) {
   return (
     <div className="flex-1 space-y-3 overflow-y-auto p-4">
       {messages.map((m, i) => (
-        <MessageBubble key={i} message={m} />
+        <MessageBubble
+          key={i}
+          message={m}
+          isThinking={isLoading && i === messages.length - 1 && m.role === "assistant"}
+        />
       ))}
       <div ref={endRef} />
     </div>

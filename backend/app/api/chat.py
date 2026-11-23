@@ -76,22 +76,42 @@ async def chat(req: ChatRequest):
             .all()
         )
         messages_for_llm = [{"role": m.role, "content": m.content} for m in history]
-
-        # Add relevant document excerpts (if any) as extra context for this turn only
-        context = await build_context(req.message)
-        if context:
-            messages_for_llm.insert(0, {"role": "system", "content": context})
+        conv_id = conv.id
 
         async def event_stream():
-            # First send the conversation ID so the client can keep track
-            yield f"data: {json.dumps({'conversation_id': conv.id})}\n\n"
+            # Send the conversation id first so the UI can leave "Thinking…" immediately.
+            yield f"data: {json.dumps({'conversation_id': conv_id})}\n\n"
+            context = await build_context(req.message)
+            llm_messages = list(messages_for_llm)
+            if context:
+                llm_messages.insert(0, {"role": "system", "content": context})
+            parts: list[str] = []
             try:
-                async for token in stream_chat(messages_for_llm):
+                async for token in stream_chat(llm_messages):
+                    parts.append(token)
                     yield f"data: {json.dumps({'token': token})}\n\n"
-                yield "data: [DONE]\n\n"
             except Exception:
+                logger.exception("Chat generation failed")
                 yield f"data: {json.dumps({'error': 'Something went wrong'})}\n\n"
+                return
+            text = "".join(parts)
+            if text:
+                save_db = SessionLocal()
+                try:
+                    save_db.add(
+                        Message(conversation_id=conv_id, role="assistant", content=text)
+                    )
+                    save_db.commit()
+                except Exception:
+                    logger.exception("Failed to save assistant message")
+                finally:
+                    save_db.close()
+            yield "data: [DONE]\n\n"
 
-        return StreamingResponse(event_stream(), media_type="text/event-stream")
+        return StreamingResponse(
+            event_stream(),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+        )
     finally:
         db.close()

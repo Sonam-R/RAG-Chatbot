@@ -11,7 +11,7 @@ export default function ChatWindow() {
         <h1 className="font-semibold">RAG Chatbot</h1>
         <button onClick={newChat} className="text-sm text-blue-600">New chat</button>
       </header>
-      <MessageList messages={messages} />
+      <MessageList messages={messages} isLoading={isLoading} />
       {error && <div className="bg-red-50 px-4 py-2 text-sm text-red-700">{error}</div>}
       <ChatInput onSend={send} onStop={stop} isLoading={isLoading} />
     </div>

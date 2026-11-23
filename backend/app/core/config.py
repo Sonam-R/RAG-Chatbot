@@ -11,7 +11,12 @@ class Settings(BaseSettings):
     # Name of the embedding model used to turn text chunks into vectors.
     embed_model: str = "nomic-embed-text"
     # Origins allowed to make CORS requests to the FastAPI server.
-    allowed_origins: list[str] = ["http://localhost:3000"]
+    allowed_origins: list[str] = [
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:3001",
+    ]
 
     # ------------------------------------------------------------
     # RAG‑specific configuration values.
@@ -26,6 +31,12 @@ class Settings(BaseSettings):
     chunk_overlap: int = 50
     # How many nearest‑neighbor chunks to retrieve when answering a query.
     top_k: int = 5
+    # Drop retrieved chunks whose cosine similarity is below this; 0.5 is a placeholder — tune from /search scores.
+    min_score: float = 0.5
+    # How many recent conversation turns to include when rewriting follow-up questions into standalone queries.
+    rewrite_history_turns: int = 4
+    # Chat-model temperature; keep low so answers stay focused on retrieved context.
+    chat_temperature: float = 0.2
 
     # Tell pydantic to read values from a .env file at the project root.
     model_config = SettingsConfigDict(env_file=".env")
