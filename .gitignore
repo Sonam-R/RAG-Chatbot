@@ -4,3 +4,4 @@ backend/.env
 backend/app.db
 frontend/.next
 __pycache__/
+chroma_data/
