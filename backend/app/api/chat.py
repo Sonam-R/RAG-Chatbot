@@ -2,7 +2,7 @@ import json
 import logging
 import re
 from typing import Optional
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from starlette.concurrency import run_in_threadpool
@@ -28,6 +28,18 @@ class ChatRequest(BaseModel):
     use_documents: bool = True
 
 
+class MessageOut(BaseModel):
+    role: str
+    content: str
+    sources: list[dict] | None = None
+
+
+class ConversationOut(BaseModel):
+    id: str
+    title: str
+    messages: list[MessageOut]
+
+
 def _snippet(text: str) -> str:
     collapsed = re.sub(r"\s+", " ", text).strip()
     if len(collapsed) > 200:
@@ -50,12 +62,34 @@ def _sources_payload(chunks: list[dict]) -> dict:
     }
 
 
-def _save_assistant(conv_id: str, text: str) -> None:
+def _parse_sources(raw: str | None) -> list[dict] | None:
+    if not raw:
+        return None
+    try:
+        data = json.loads(raw)
+        if isinstance(data, list):
+            return data
+    except json.JSONDecodeError:
+        logger.warning("Failed to parse stored sources JSON")
+        return None
+    logger.warning("Stored sources is not a JSON list")
+    return None
+
+
+def _save_assistant(conv_id: str, text: str, sources: list[dict] | None = None) -> None:
     if not text:
         return
     db = SessionLocal()
     try:
-        db.add(Message(conversation_id=conv_id, role="assistant", content=text))
+        stored = json.dumps(sources) if sources else None
+        db.add(
+            Message(
+                conversation_id=conv_id,
+                role="assistant",
+                content=text,
+                sources=stored,
+            )
+        )
         db.commit()
     except Exception:
         logger.exception("Failed to save assistant message")
@@ -157,8 +191,9 @@ async def chat(req: ChatRequest):
                     logger.exception("Chat generation failed")
                     yield f"data: {json.dumps({'error': 'Something went wrong'})}\n\n"
                     return
-                _save_assistant(conv_id, "".join(parts))
-                yield f"data: {json.dumps(_sources_payload(chunks))}\n\n"
+                sources_list = _sources_payload(chunks)["sources"]
+                _save_assistant(conv_id, "".join(parts), sources_list)
+                yield f"data: {json.dumps({'sources': sources_list})}\n\n"
                 yield "data: [DONE]\n\n"
                 return
 
@@ -179,6 +214,35 @@ async def chat(req: ChatRequest):
             event_stream(),
             media_type="text/event-stream",
             headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+        )
+    finally:
+        db.close()
+
+
+@router.get("/conversations/{conversation_id}", response_model=ConversationOut)
+def get_conversation(conversation_id: str):
+    db = SessionLocal()
+    try:
+        conv = db.query(Conversation).filter(Conversation.id == conversation_id).first()
+        if not conv:
+            raise HTTPException(status_code=404, detail="Conversation not found")
+        rows = (
+            db.query(Message)
+            .filter(Message.conversation_id == conv.id)
+            .order_by(Message.id)
+            .all()
+        )
+        return ConversationOut(
+            id=conv.id,
+            title=conv.title,
+            messages=[
+                MessageOut(
+                    role=m.role,
+                    content=m.content,
+                    sources=_parse_sources(m.sources),
+                )
+                for m in rows
+            ],
         )
     finally:
         db.close()

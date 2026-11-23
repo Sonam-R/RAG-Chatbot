@@ -3,9 +3,12 @@ import io
 import logging
 from pathlib import Path
 from fastapi import APIRouter, File, HTTPException, Query, UploadFile
+from pydantic import BaseModel
 from pypdf import PdfReader
 from starlette.concurrency import run_in_threadpool
 from app.core.config import settings
+from app.db.models import Document
+from app.db.session import SessionLocal
 from app.rag.chunker import chunk_text
 from app.rag.embedder import embed_texts
 from app.rag.vector_store import add_chunks, delete_document, search as vector_search
@@ -13,6 +16,14 @@ from app.rag.vector_store import add_chunks, delete_document, search as vector_s
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api")
 ALLOWED = {".pdf", ".txt", ".md"}
+
+
+class DocumentOut(BaseModel):
+    id: str
+    filename: str
+    pages: int
+    chunks: int
+    created_at: str
 
 def extract_pages(ext: str, data: bytes) -> list[tuple[int, str]]:
     """Extract page number and text from a file.
@@ -65,8 +76,41 @@ async def upload_document(file: UploadFile = File(...)):
         logger.exception("Embedding failed")
         raise HTTPException(status_code=502, detail="Embedding service unavailable")
     ids = [f"{doc_id}-{i}" for i in range(len(texts))]
-    await run_in_threadpool(delete_document, doc_id)  # drop any earlier upload of the same file
-    await run_in_threadpool(add_chunks, ids, texts, embeddings, metadatas)
+    try:
+        await run_in_threadpool(delete_document, doc_id)  # drop any earlier upload of the same file
+        await run_in_threadpool(add_chunks, ids, texts, embeddings, metadatas)
+    except Exception:
+        logger.exception("Failed to store document vectors")
+        raise HTTPException(status_code=502, detail="Failed to store document vectors")
+
+    db = SessionLocal()
+    try:
+        row = db.query(Document).filter(Document.id == doc_id).first()
+        if row:
+            row.filename = file.filename or ""
+            row.pages = len(pages)
+            row.chunks = len(texts)
+        else:
+            db.add(
+                Document(
+                    id=doc_id,
+                    filename=file.filename or "",
+                    pages=len(pages),
+                    chunks=len(texts),
+                )
+            )
+        db.commit()
+    except Exception:
+        db.rollback()
+        logger.exception("Failed to save document metadata")
+        try:
+            delete_document(doc_id)
+        except Exception:
+            logger.exception("Failed to roll back vectors after a metadata error")
+        raise HTTPException(status_code=500, detail="Failed to save document metadata")
+    finally:
+        db.close()
+
     return {"doc_id": doc_id, "filename": file.filename, "pages": len(pages), "chunks": len(texts)}
 
 @router.get("/search")
@@ -78,7 +122,39 @@ async def search_documents(q: str = Query(..., min_length=1), k: int | None = Qu
         raise HTTPException(status_code=502, detail="Embedding service unavailable")
     return await run_in_threadpool(vector_search, query_emb, k or settings.top_k)
 
+@router.get("/documents", response_model=list[DocumentOut])
+def list_documents():
+    db = SessionLocal()
+    try:
+        rows = db.query(Document).order_by(Document.created_at.desc()).all()
+        return [
+            DocumentOut(
+                id=r.id,
+                filename=r.filename,
+                pages=r.pages,
+                chunks=r.chunks,
+                created_at=r.created_at.isoformat(),
+            )
+            for r in rows
+        ]
+    finally:
+        db.close()
+
+
 @router.delete("/documents/{doc_id}")
 def delete_document_endpoint(doc_id: str):
-    delete_document(doc_id)
-    return {"deleted": doc_id}
+    db = SessionLocal()
+    try:
+        row = db.query(Document).filter(Document.id == doc_id).first()
+        if not row:
+            raise HTTPException(status_code=404, detail="Document not found")
+        try:
+            delete_document(doc_id)
+        except Exception:
+            logger.exception("Failed to delete document vectors")
+            raise HTTPException(status_code=502, detail="Failed to delete document vectors")
+        db.delete(row)
+        db.commit()
+        return {"deleted": doc_id}
+    finally:
+        db.close()
