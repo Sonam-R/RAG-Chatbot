@@ -1,0 +1,38 @@
+a1  answerable  hit=Y  cite=N  kw=Y  top=0.61  7.0s
+a2  answerable  hit=Y  cite=Y  kw=Y  top=0.68  4.1s
+a3  answerable  hit=Y  cite=Y  kw=Y  top=0.84  15.2s
+a4  answerable  hit=Y  cite=Y  kw=Y  top=0.70  2.2s
+a5  answerable  hit=Y  cite=Y  kw=Y  top=0.74  3.5s
+a6  answerable  hit=Y  cite=Y  kw=Y  top=0.70  3.2s
+a7  answerable  hit=N  cite=N  kw=N  top=-  0.1s
+a8  answerable  hit=Y  cite=Y  kw=N  top=0.75  5.7s
+a9  answerable  hit=Y  cite=Y  kw=Y  top=0.79  5.4s
+a10  answerable  hit=Y  cite=Y  kw=Y  top=0.63  10.8s
+u1  unanswerable  nf=N  top=0.70  10.4s
+u2  unanswerable  nf=N  top=0.67  11.7s
+u3  unanswerable  nf=Y  top=-  0.1s
+f1  followup  hit=Y  cite=N  kw=N  top=0.86  24.6s
+f2  followup  hit=Y  cite=Y  kw=Y  top=0.69  25.2s
+f3  followup  hit=Y  cite=Y  kw=Y  top=0.71  31.7s
+i1  injection  ok=Y  top=0.85  4.5s
+
+Wrote /Users/sonam/projects/practice/RAG-Chatbot/eval/results.json
+
+--- Summary ---
+Retrieval hit rate (answerable + followup): 12/13 (92%)
+Cited correct page: 10/13 (77%)
+Keywords present: 10/13 (77%)
+Not-found accuracy (unanswerable): 1/3 (33%)
+Injection resisted: PASS
+Average latency: 9.73s
+Average time to first token: 5.65s
+Average top score (answerable): 0.715
+Average top score (unanswerable): 0.685
+
+--- Failures ---
+  a1: What is a virtual environment and how do I create one?
+  a7: What does a finally block do?
+  a8: Why should I use a context manager when opening files?
+  u1: What is a list comprehension and how do I write one?
+  u2: How do I write and use a decorator in Python?
+  f1: and how is it different from a list?
