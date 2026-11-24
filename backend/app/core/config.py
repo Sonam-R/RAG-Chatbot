@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     # Groq configuration (primary LLM provider)
     # ------------------------------------------------------------
     groq_base_url: str = "https://api.groq.com/openai/v1"
-    groq_api_key: str = ""   # placeholder – replace in .env
+    groq_api_key: str = ""   # populated from GROQ_API_KEY env variable (do not commit secrets)
     groq_chat_model: str = "gemma2-9b-it"
 
     # ------------------------------------------------------------
