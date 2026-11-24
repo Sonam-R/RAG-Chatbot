@@ -88,12 +88,19 @@ export async function streamChat(params: {
           return;
         }
         try {
-          const data = JSON.parse(payload) as StreamEvent;
+          const data = JSON.parse(payload) as StreamEvent & { status?: string };
+          if ("status" in data) continue;
           if (Array.isArray(data.sources)) {
             params.onSources?.(data.sources);
             continue;
           }
-          params.onEvent(data);
+          if (
+            "conversation_id" in data ||
+            "token" in data ||
+            "error" in data
+          ) {
+            params.onEvent(data);
+          }
         } catch {
           // skip malformed SSE payloads
         }

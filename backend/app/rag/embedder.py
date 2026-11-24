@@ -24,6 +24,10 @@ async def embed_texts(texts: list[str], prefix: str = "") -> list[list[float]]:
     for i in range(0, len(texts), BATCH):
         batch = [prefix + t for t in texts[i:i + BATCH]]
         # The OpenAI/Ollama client exposes an ``embeddings`` namespace.
-        resp = await client.embeddings.create(model=settings.embed_model, input=batch)
+        resp = await client.embeddings.create(
+            model=settings.embed_model,
+            input=batch,
+            extra_body={"keep_alive": settings.ollama_keep_alive},
+        )
         out.extend(d.embedding for d in resp.data)
     return out

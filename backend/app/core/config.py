@@ -37,6 +37,14 @@ class Settings(BaseSettings):
     rewrite_history_turns: int = 4
     # Chat-model temperature; keep low so answers stay focused on retrieved context.
     chat_temperature: float = 0.2
+    # How long Ollama keeps models loaded after a request (e.g. 30m, -1).
+    ollama_keep_alive: str = "30m"
+    # Optional smaller model for query rewriting; None uses CHAT_MODEL.
+    rewriter_model: str | None = None
+    # Chunks included in the RAG prompt (after min_score filter; search still uses TOP_K).
+    rag_top_k: int = 3
+    # Recent messages sent to the chat model when use_documents is true.
+    chat_history_limit: int = 8
 
     # Tell pydantic to read values from a .env file at the project root.
     model_config = SettingsConfigDict(env_file=".env")

@@ -1,12 +1,14 @@
 import json
 import logging
 import re
+import time
 from typing import Optional
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from starlette.concurrency import run_in_threadpool
 from ..core.config import settings
+from ..core.timing import timed
 from ..llm.provider import client, stream_chat
 from ..rag.embedder import embed_texts
 from ..rag.prompt import NOT_FOUND_MESSAGE, build_messages
@@ -100,10 +102,16 @@ def _save_assistant(conv_id: str, text: str, sources: list[dict] | None = None) 
 async def retrieve_chunks(question: str, history: list[dict]) -> list[dict] | None:
     """Rewrite, embed, search, and drop hits below min_score. None means retrieval failed."""
     try:
-        rewritten = await run_in_threadpool(rewrite_question, question, history)
-        query_emb = (await embed_texts([rewritten], prefix=_QUERY_PREFIX))[0]
-        hits = await run_in_threadpool(vector_search, query_emb, 5)
-        return [h for h in hits if (h.get("score") or 0) >= settings.min_score]
+        with timed("rewrite"):
+            rewritten = await run_in_threadpool(rewrite_question, question, history)
+        with timed("embed"):
+            query_emb = (await embed_texts([rewritten], prefix=_QUERY_PREFIX))[0]
+        with timed("search"):
+            hits = await run_in_threadpool(vector_search, query_emb, settings.top_k)
+        filtered = [h for h in hits if (h.get("score") or 0) >= settings.min_score]
+        chunks = filtered[: settings.rag_top_k]
+        logger.info("chunks: %d", len(chunks))
+        return chunks
     except Exception:
         logger.warning("Document retrieval failed; answering without documents")
         return None
@@ -114,6 +122,7 @@ async def _stream_llm(messages: list[dict], temperature: float | None = None):
         "model": settings.chat_model,
         "messages": messages,
         "stream": True,
+        "extra_body": {"keep_alive": settings.ollama_keep_alive},
     }
     if temperature is not None:
         kwargs["temperature"] = temperature
@@ -124,6 +133,17 @@ async def _stream_llm(messages: list[dict], temperature: float | None = None):
         delta = chunk.choices[0].delta.content
         if delta:
             yield delta
+
+
+def _log_ttft(request_start: float, state: dict[str, bool]) -> None:
+    if state["logged"]:
+        return
+    state["logged"] = True
+    logger.info("time to first token: %.2fs", time.perf_counter() - request_start)
+
+
+def _log_total(request_start: float) -> None:
+    logger.info("total: %.2fs", time.perf_counter() - request_start)
 
 
 @router.post("/chat")
@@ -167,17 +187,22 @@ async def chat(req: ChatRequest):
         use_documents = req.use_documents
 
         async def event_stream():
+            request_start = time.perf_counter()
+            ttft_state = {"logged": False}
             yield f"data: {json.dumps({'conversation_id': conv_id})}\n\n"
 
             chunks: list[dict] | None = None
             if use_documents:
+                yield f"data: {json.dumps({'status': 'searching documents'})}\n\n"
                 chunks = await retrieve_chunks(req.message, prior_history)
                 if chunks is not None and not chunks:
                     logger.info("No relevant document chunks; skipping LLM")
+                    _log_ttft(request_start, ttft_state)
                     yield f"data: {json.dumps({'token': NOT_FOUND_MESSAGE})}\n\n"
                     _save_assistant(conv_id, NOT_FOUND_MESSAGE)
                     yield f"data: {json.dumps({'sources': []})}\n\n"
                     yield "data: [DONE]\n\n"
+                    _log_total(request_start)
                     return
 
             if use_documents and chunks:
@@ -185,30 +210,36 @@ async def chat(req: ChatRequest):
                 parts: list[str] = []
                 try:
                     async for token in _stream_llm(llm_messages, settings.chat_temperature):
+                        _log_ttft(request_start, ttft_state)
                         parts.append(token)
                         yield f"data: {json.dumps({'token': token})}\n\n"
                 except Exception:
                     logger.exception("Chat generation failed")
                     yield f"data: {json.dumps({'error': 'Something went wrong'})}\n\n"
+                    _log_total(request_start)
                     return
                 sources_list = _sources_payload(chunks)["sources"]
                 _save_assistant(conv_id, "".join(parts), sources_list)
                 yield f"data: {json.dumps({'sources': sources_list})}\n\n"
                 yield "data: [DONE]\n\n"
+                _log_total(request_start)
                 return
 
             # Day 2 path: no rewriting, no search, no sources event
             parts: list[str] = []
             try:
                 async for token in stream_chat(messages_for_llm):
+                    _log_ttft(request_start, ttft_state)
                     parts.append(token)
                     yield f"data: {json.dumps({'token': token})}\n\n"
             except Exception:
                 logger.exception("Chat generation failed")
                 yield f"data: {json.dumps({'error': 'Something went wrong'})}\n\n"
+                _log_total(request_start)
                 return
             _save_assistant(conv_id, "".join(parts))
             yield "data: [DONE]\n\n"
+            _log_total(request_start)
 
         return StreamingResponse(
             event_stream(),

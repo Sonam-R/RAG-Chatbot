@@ -26,9 +26,8 @@ def build_messages(question: str, chunks: list[dict], history: list[dict]) -> li
     """Build OpenAI chat messages from rules, context, trimmed history, and the question."""
     context = format_context(chunks)
     system = f"{SYSTEM_RULES}\nCONTEXT:\n{context}" if context else f"{SYSTEM_RULES}\nCONTEXT:\n"
-    n = settings.rewrite_history_turns * 2
     return [
         {"role": "system", "content": system},
-        *history[-n:],
+        *history[-settings.chat_history_limit :],
         {"role": "user", "content": question},
     ]
