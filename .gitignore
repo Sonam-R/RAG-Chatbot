@@ -2,6 +2,8 @@ node_modules/
 .DS_Store
 backend/.env
 backend/app.db
+backend/chroma_data/
+**/chroma_data/
 frontend/.next
 __pycache__/
 chroma_data/

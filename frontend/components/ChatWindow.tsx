@@ -9,6 +9,7 @@ export default function ChatWindow() {
     isLoading,
     error,
     send,
+    retry,
     stop,
     newChat,
     useDocuments,
@@ -23,7 +24,20 @@ export default function ChatWindow() {
         </button>
       </header>
       <MessageList messages={messages} isLoading={isLoading} />
-      {error && <div className="bg-red-50 px-4 py-2 text-sm text-red-700">{error}</div>}
+      {error && (
+        <div className="flex flex-wrap items-center gap-3 bg-red-50 px-4 py-2 text-sm text-red-700">
+          <span>{error}</span>
+          {!isLoading && (
+            <button
+              type="button"
+              onClick={() => void retry()}
+              className="rounded border border-red-300 px-2 py-0.5 text-red-800 hover:bg-red-100"
+            >
+              Retry
+            </button>
+          )}
+        </div>
+      )}
       <label className="flex items-center gap-2 border-t px-3 pt-2 text-sm">
         <input
           type="checkbox"

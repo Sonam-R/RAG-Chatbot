@@ -3,24 +3,28 @@ import logging
 import re
 import time
 from typing import Optional
-from fastapi import APIRouter, HTTPException
+
+from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from starlette.concurrency import run_in_threadpool
-from ..core.config import settings
-from ..core.timing import timed
-from ..llm.provider import client, stream_chat
-from ..rag.embedder import embed_texts
-from ..rag.prompt import NOT_FOUND_MESSAGE, build_messages
-from ..rag.rewriter import rewrite_question
-from ..rag.vector_store import search as vector_search
-from ..db.session import SessionLocal
-from ..db.models import Conversation, Message
+
+from app.core.chat_metrics import ChatRequestMetrics
+from app.core.config import settings
+from app.core.errors import MODEL_UNAVAILABLE_MESSAGE, ModelUnavailableError, map_openai_error
+from app.core.limiter import limiter
+from app.core.logging import log_chat_audit
+from app.core.request_context import get_request_id
+from app.db.models import Conversation, Message
+from app.db.session import SessionLocal
+from app.rag.embedder import embed_texts
+from app.rag.prompt import NOT_FOUND_MESSAGE, build_messages
+from app.rag.rewriter import rewrite_question
+from app.rag.vector_store import search as vector_search
+from app.llm.provider import client, stream_chat
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api")
-
-# Same query-side prefix the search endpoint passes to embed_texts.
 _QUERY_PREFIX = "search_query: "
 
 
@@ -99,21 +103,36 @@ def _save_assistant(conv_id: str, text: str, sources: list[dict] | None = None) 
         db.close()
 
 
-async def retrieve_chunks(question: str, history: list[dict]) -> list[dict] | None:
+def _chunk_summaries(hits: list[dict]) -> list[dict]:
+    return [{"chunk_id": h.get("chunk_id"), "score": h.get("score")} for h in hits]
+
+
+async def retrieve_chunks(
+    question: str, history: list[dict], metrics: ChatRequestMetrics
+) -> list[dict] | None:
     """Rewrite, embed, search, and drop hits below min_score. None means retrieval failed."""
     try:
-        with timed("rewrite"):
-            rewritten = await run_in_threadpool(rewrite_question, question, history)
-        with timed("embed"):
-            query_emb = (await embed_texts([rewritten], prefix=_QUERY_PREFIX))[0]
-        with timed("search"):
-            hits = await run_in_threadpool(vector_search, query_emb, settings.top_k)
+        t0 = time.perf_counter()
+        rewritten = await run_in_threadpool(rewrite_question, question, history)
+        metrics.rewrite_s = round(time.perf_counter() - t0, 4)
+        metrics.rewritten_question = rewritten
+
+        t0 = time.perf_counter()
+        query_emb = (await embed_texts([rewritten], prefix=_QUERY_PREFIX))[0]
+        metrics.embed_s = round(time.perf_counter() - t0, 4)
+
+        t0 = time.perf_counter()
+        hits = await run_in_threadpool(vector_search, query_emb, settings.top_k)
+        metrics.search_s = round(time.perf_counter() - t0, 4)
+        metrics.chunks_before = _chunk_summaries(hits)
+
         filtered = [h for h in hits if (h.get("score") or 0) >= settings.min_score]
-        chunks = filtered[: settings.rag_top_k]
-        logger.info("chunks: %d", len(chunks))
-        return chunks
+        metrics.chunks_after = _chunk_summaries(filtered)
+        return filtered[: settings.rag_top_k]
+    except ModelUnavailableError:
+        raise
     except Exception:
-        logger.warning("Document retrieval failed; answering without documents")
+        logger.warning("Document retrieval failed; answering without documents", exc_info=True)
         return None
 
 
@@ -126,31 +145,43 @@ async def _stream_llm(messages: list[dict], temperature: float | None = None):
     }
     if temperature is not None:
         kwargs["temperature"] = temperature
-    stream = await client.chat.completions.create(**kwargs)
-    async for chunk in stream:
-        if not chunk.choices:
-            continue
-        delta = chunk.choices[0].delta.content
-        if delta:
-            yield delta
+    try:
+        stream = await client.chat.completions.create(**kwargs)
+    except Exception as exc:
+        try:
+            map_openai_error(exc)
+        except ModelUnavailableError:
+            raise
+        raise
+    try:
+        async for chunk in stream:
+            if not chunk.choices:
+                continue
+            delta = chunk.choices[0].delta.content
+            if delta:
+                yield delta
+    except Exception as exc:
+        try:
+            map_openai_error(exc)
+        except ModelUnavailableError:
+            raise
+        raise
 
 
-def _log_ttft(request_start: float, state: dict[str, bool]) -> None:
-    if state["logged"]:
-        return
-    state["logged"] = True
-    logger.info("time to first token: %.2fs", time.perf_counter() - request_start)
+def _record_first_token(request_start: float, ttft_state: dict[str, float | None]) -> None:
+    if ttft_state["t"] is None:
+        ttft_state["t"] = time.perf_counter() - request_start
 
 
-def _log_total(request_start: float) -> None:
-    logger.info("total: %.2fs", time.perf_counter() - request_start)
+def _emit_audit(metrics: ChatRequestMetrics) -> None:
+    log_chat_audit(metrics.to_log_dict(get_request_id()))
 
 
 @router.post("/chat")
-async def chat(req: ChatRequest):
+@limiter.limit(settings.rate_limit_chat)
+async def chat(request: Request, req: ChatRequest):
     db = SessionLocal()
     try:
-        # Retrieve existing conversation or create a new one
         if req.conversation_id:
             conv = db.query(Conversation).filter(Conversation.id == req.conversation_id).first()
             if not conv:
@@ -164,17 +195,11 @@ async def chat(req: ChatRequest):
             db.commit()
             db.refresh(conv)
 
-        # Store the user's message
-        user_msg = Message(
-            conversation_id=conv.id,
-            role="user",
-            content=req.message,
-        )
+        user_msg = Message(conversation_id=conv.id, role="user", content=req.message)
         db.add(user_msg)
         db.commit()
         db.refresh(user_msg)
 
-        # Gather full conversation history for the LLM
         history = (
             db.query(Message)
             .filter(Message.conversation_id == conv.id)
@@ -186,60 +211,109 @@ async def chat(req: ChatRequest):
         conv_id = conv.id
         use_documents = req.use_documents
 
+        metrics = ChatRequestMetrics(
+            conversation_id=conv_id,
+            use_documents=use_documents,
+            question_chars=len(req.message),
+        )
+
         async def event_stream():
             request_start = time.perf_counter()
-            ttft_state = {"logged": False}
+            ttft_state: dict[str, float | None] = {"t": None}
             yield f"data: {json.dumps({'conversation_id': conv_id})}\n\n"
 
-            chunks: list[dict] | None = None
-            if use_documents:
-                yield f"data: {json.dumps({'status': 'searching documents'})}\n\n"
-                chunks = await retrieve_chunks(req.message, prior_history)
-                if chunks is not None and not chunks:
-                    logger.info("No relevant document chunks; skipping LLM")
-                    _log_ttft(request_start, ttft_state)
-                    yield f"data: {json.dumps({'token': NOT_FOUND_MESSAGE})}\n\n"
-                    _save_assistant(conv_id, NOT_FOUND_MESSAGE)
-                    yield f"data: {json.dumps({'sources': []})}\n\n"
+            try:
+                chunks: list[dict] | None = None
+                if use_documents:
+                    yield f"data: {json.dumps({'status': 'searching documents'})}\n\n"
+                    try:
+                        chunks = await retrieve_chunks(req.message, prior_history, metrics)
+                    except ModelUnavailableError:
+                        metrics.outcome = "error"
+                        metrics.total_s = round(time.perf_counter() - request_start, 4)
+                        yield f"data: {json.dumps({'error': MODEL_UNAVAILABLE_MESSAGE})}\n\n"
+                        _emit_audit(metrics)
+                        yield "data: [DONE]\n\n"
+                        return
+
+                    if chunks is not None and not chunks:
+                        metrics.outcome = "not_found"
+                        _record_first_token(request_start, ttft_state)
+                        metrics.first_token_s = ttft_state["t"]
+                        yield f"data: {json.dumps({'token': NOT_FOUND_MESSAGE})}\n\n"
+                        _save_assistant(conv_id, NOT_FOUND_MESSAGE)
+                        yield f"data: {json.dumps({'sources': []})}\n\n"
+                        metrics.answer_chars = len(NOT_FOUND_MESSAGE)
+                        metrics.total_s = round(time.perf_counter() - request_start, 4)
+                        _emit_audit(metrics)
+                        yield "data: [DONE]\n\n"
+                        return
+
+                if use_documents and chunks:
+                    llm_messages = build_messages(req.message, chunks, prior_history)
+                    metrics.prompt_chars = sum(len(m.get("content", "")) for m in llm_messages)
+                    parts: list[str] = []
+                    try:
+                        async for token in _stream_llm(llm_messages, settings.chat_temperature):
+                            _record_first_token(request_start, ttft_state)
+                            parts.append(token)
+                            yield f"data: {json.dumps({'token': token})}\n\n"
+                    except ModelUnavailableError:
+                        metrics.outcome = "error"
+                        metrics.total_s = round(time.perf_counter() - request_start, 4)
+                        yield f"data: {json.dumps({'error': MODEL_UNAVAILABLE_MESSAGE})}\n\n"
+                        _emit_audit(metrics)
+                        return
+                    except Exception:
+                        logger.exception("Chat generation failed")
+                        metrics.outcome = "error"
+                        metrics.total_s = round(time.perf_counter() - request_start, 4)
+                        yield f"data: {json.dumps({'error': 'Something went wrong'})}\n\n"
+                        _emit_audit(metrics)
+                        return
+                    answer = "".join(parts)
+                    metrics.answer_chars = len(answer)
+                    metrics.first_token_s = ttft_state["t"]
+                    sources_list = _sources_payload(chunks)["sources"]
+                    _save_assistant(conv_id, answer, sources_list)
+                    yield f"data: {json.dumps({'sources': sources_list})}\n\n"
+                    metrics.total_s = round(time.perf_counter() - request_start, 4)
+                    _emit_audit(metrics)
                     yield "data: [DONE]\n\n"
-                    _log_total(request_start)
                     return
 
-            if use_documents and chunks:
-                llm_messages = build_messages(req.message, chunks, prior_history)
                 parts: list[str] = []
                 try:
-                    async for token in _stream_llm(llm_messages, settings.chat_temperature):
-                        _log_ttft(request_start, ttft_state)
+                    async for token in stream_chat(messages_for_llm):
+                        _record_first_token(request_start, ttft_state)
                         parts.append(token)
                         yield f"data: {json.dumps({'token': token})}\n\n"
+                except ModelUnavailableError:
+                    metrics.outcome = "error"
+                    metrics.total_s = round(time.perf_counter() - request_start, 4)
+                    yield f"data: {json.dumps({'error': MODEL_UNAVAILABLE_MESSAGE})}\n\n"
+                    _emit_audit(metrics)
+                    return
                 except Exception:
                     logger.exception("Chat generation failed")
+                    metrics.outcome = "error"
+                    metrics.total_s = round(time.perf_counter() - request_start, 4)
                     yield f"data: {json.dumps({'error': 'Something went wrong'})}\n\n"
-                    _log_total(request_start)
+                    _emit_audit(metrics)
                     return
-                sources_list = _sources_payload(chunks)["sources"]
-                _save_assistant(conv_id, "".join(parts), sources_list)
-                yield f"data: {json.dumps({'sources': sources_list})}\n\n"
+                answer = "".join(parts)
+                metrics.answer_chars = len(answer)
+                metrics.first_token_s = ttft_state["t"]
+                _save_assistant(conv_id, answer)
+                metrics.total_s = round(time.perf_counter() - request_start, 4)
+                _emit_audit(metrics)
                 yield "data: [DONE]\n\n"
-                _log_total(request_start)
-                return
-
-            # Day 2 path: no rewriting, no search, no sources event
-            parts: list[str] = []
-            try:
-                async for token in stream_chat(messages_for_llm):
-                    _log_ttft(request_start, ttft_state)
-                    parts.append(token)
-                    yield f"data: {json.dumps({'token': token})}\n\n"
             except Exception:
-                logger.exception("Chat generation failed")
+                logger.exception("Unexpected chat stream error")
+                metrics.outcome = "error"
+                metrics.total_s = round(time.perf_counter() - request_start, 4)
                 yield f"data: {json.dumps({'error': 'Something went wrong'})}\n\n"
-                _log_total(request_start)
-                return
-            _save_assistant(conv_id, "".join(parts))
-            yield "data: [DONE]\n\n"
-            _log_total(request_start)
+                _emit_audit(metrics)
 
         return StreamingResponse(
             event_stream(),
@@ -251,7 +325,8 @@ async def chat(req: ChatRequest):
 
 
 @router.get("/conversations/{conversation_id}", response_model=ConversationOut)
-def get_conversation(conversation_id: str):
+@limiter.limit(settings.rate_limit_default)
+def get_conversation(request: Request, conversation_id: str):
     db = SessionLocal()
     try:
         conv = db.query(Conversation).filter(Conversation.id == conversation_id).first()

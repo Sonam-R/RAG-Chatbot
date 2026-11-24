@@ -17,13 +17,14 @@ def search(query_embedding: list[float], k: int) -> list[dict]:
     res = _collection.query(
         query_embeddings=[query_embedding],
         n_results=k,
-        include=["documents", "metadatas", "distances"],
+        include=["documents", "metadatas", "distances", "ids"],
     )
     hits: list[dict] = []
-    for doc, meta, dist in zip(
-        res["documents"][0], res["metadatas"][0], res["distances"][0]
+    for chunk_id, doc, meta, dist in zip(
+        res["ids"][0], res["documents"][0], res["metadatas"][0], res["distances"][0]
     ):
         hits.append({
+            "chunk_id": chunk_id,
             "text": doc,
             "filename": meta.get("filename"),
             "page": meta.get("page"),

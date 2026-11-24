@@ -11,12 +11,7 @@ class Settings(BaseSettings):
     # Name of the embedding model used to turn text chunks into vectors.
     embed_model: str = "nomic-embed-text"
     # Origins allowed to make CORS requests to the FastAPI server.
-    allowed_origins: list[str] = [
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:3001",
-    ]
+    allowed_origins: list[str] = ["http://localhost:3000"]
 
     # ------------------------------------------------------------
     # RAG‑specific configuration values.
@@ -45,6 +40,12 @@ class Settings(BaseSettings):
     rag_top_k: int = 3
     # Recent messages sent to the chat model when use_documents is true.
     chat_history_limit: int = 8
+    rate_limit_chat: str = "20/minute"
+    rate_limit_upload: str = "5/minute"
+    rate_limit_default: str = "60/minute"
+    max_chunks_per_document: int = 500
+    llm_timeout_seconds: float = 120.0
+    embed_timeout_seconds: float = 30.0
 
     # Tell pydantic to read values from a .env file at the project root.
     model_config = SettingsConfigDict(env_file=".env")

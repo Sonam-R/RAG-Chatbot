@@ -64,7 +64,11 @@ def rewrite_question(question: str, history: list[dict]) -> str:
     ]
     model = settings.rewriter_model or settings.chat_model
     try:
-        client = OpenAI(base_url=settings.llm_base_url, api_key=settings.llm_api_key)
+        client = OpenAI(
+            base_url=settings.llm_base_url,
+            api_key=settings.llm_api_key,
+            timeout=settings.llm_timeout_seconds,
+        )
         resp = client.chat.completions.create(
             model=model,
             messages=messages,

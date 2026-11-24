@@ -33,9 +33,18 @@ export type StreamEvent = {
 async function apiError(res: Response): Promise<Error> {
   try {
     const body: unknown = await res.json();
-    if (body && typeof body === "object" && "detail" in body) {
-      const detail = (body as { detail: unknown }).detail;
-      if (typeof detail === "string") return new Error(detail);
+    if (body && typeof body === "object") {
+      if ("error" in body && typeof (body as { error: unknown }).error === "string") {
+        return new Error((body as { error: string }).error);
+      }
+      if ("detail" in body) {
+        const detail = (body as { detail: unknown }).detail;
+        if (typeof detail === "string") return new Error(detail);
+        if (detail && typeof detail === "object" && "error" in detail) {
+          const msg = (detail as { error: unknown }).error;
+          if (typeof msg === "string") return new Error(msg);
+        }
+      }
     }
   } catch {
     // response was not JSON

@@ -11,6 +11,7 @@ export function useChat() {
   const [error, setError] = useState<string | null>(null);
   const [useDocuments, setUseDocuments] = useState(true);
   const abortRef = useRef<AbortController | null>(null);
+  const lastUserMessageRef = useRef<string | null>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -25,16 +26,30 @@ export function useChat() {
     });
   }, []);
 
-  const send = useCallback(
-    async (text: string) => {
-      if (!text.trim() || isLoading) return;
+  const runStream = useCallback(
+    async (text: string, appendUser: boolean) => {
       setError(null);
       setIsLoading(true);
-      setMessages((prev) => [
-        ...prev,
-        { role: "user", content: text },
-        { role: "assistant", content: "", sources: null },
-      ]);
+      lastUserMessageRef.current = text;
+
+      if (appendUser) {
+        setMessages((prev) => [
+          ...prev,
+          { role: "user", content: text },
+          { role: "assistant", content: "", sources: null },
+        ]);
+      } else {
+        setMessages((prev) => {
+          const copy = [...prev];
+          const last = copy[copy.length - 1];
+          if (last?.role === "assistant") {
+            copy[copy.length - 1] = { ...last, content: "", sources: null };
+          } else {
+            copy.push({ role: "assistant", content: "", sources: null });
+          }
+          return copy;
+        });
+      }
 
       const controller = new AbortController();
       abortRef.current = controller;
@@ -64,6 +79,7 @@ export function useChat() {
               setMessages((prev) => {
                 const copy = [...prev];
                 const last = copy[copy.length - 1];
+                if (!last || last.role !== "assistant") return prev;
                 copy[copy.length - 1] = { ...last, content: last.content + token };
                 return copy;
               });
@@ -80,8 +96,22 @@ export function useChat() {
         abortRef.current = null;
       }
     },
-    [conversationId, isLoading, useDocuments]
+    [conversationId, useDocuments]
   );
+
+  const send = useCallback(
+    async (text: string) => {
+      if (!text.trim() || isLoading) return;
+      await runStream(text.trim(), true);
+    },
+    [isLoading, runStream]
+  );
+
+  const retry = useCallback(async () => {
+    const text = lastUserMessageRef.current;
+    if (!text || isLoading) return;
+    await runStream(text, false);
+  }, [isLoading, runStream]);
 
   const stop = useCallback(() => abortRef.current?.abort(), []);
 
@@ -90,6 +120,7 @@ export function useChat() {
     setConversationId(null);
     setMessages([]);
     setError(null);
+    lastUserMessageRef.current = null;
   }, []);
 
   return {
@@ -97,6 +128,7 @@ export function useChat() {
     isLoading,
     error,
     send,
+    retry,
     stop,
     newChat,
     useDocuments,
