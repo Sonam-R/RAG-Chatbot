@@ -14,6 +14,13 @@ class Settings(BaseSettings):
     allowed_origins: list[str] = ["http://localhost:3000"]
 
     # ------------------------------------------------------------
+    # Groq configuration (primary LLM provider)
+    # ------------------------------------------------------------
+    groq_base_url: str = "https://api.groq.com/openai/v1"
+    groq_api_key: str = ""   # placeholder – replace in .env
+    groq_chat_model: str = "gemma2-9b-it"
+
+    # ------------------------------------------------------------
     # RAG‑specific configuration values.
     # ------------------------------------------------------------
     # Directory where ChromaDB will persist its vector collection.

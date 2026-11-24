@@ -42,7 +42,7 @@ async def warm_models() -> None:
         logger.warning("Embedding model warm-up failed", exc_info=True)
 
 
-async def stream_chat(messages: list[dict]) -> AsyncIterator[str]:
+async def _ollama_stream_chat(messages: list[dict]) -> AsyncIterator[str]:
     try:
         stream = await client.chat.completions.create(
             model=settings.chat_model,
@@ -73,3 +73,40 @@ async def stream_chat(messages: list[dict]) -> AsyncIterator[str]:
         if isinstance(exc, (APIConnectionError, APITimeoutError)):
             raise ModelUnavailableError() from exc
         raise
+
+# ---------------------------------------------------------------------------
+# Public fallback‑aware stream_chat()
+# ---------------------------------------------------------------------------
+from .groq_provider import stream_chat as _groq_stream_chat
+
+async def stream_chat(messages: list[dict]) -> AsyncIterator[str]:
+    """Try Groq first, fall back to Ollama on any ModelUnavailableError."""
+    try:
+        logger.info("Attempting Groq LLM")
+        async for token in _groq_stream_chat(messages):
+            yield token
+        return
+    except ModelUnavailableError as exc:
+        logger.warning("Groq failed (%s) – falling back to Ollama", exc.__class__.__name__)
+    # Fallback to Ollama
+    async for token in _ollama_stream_chat(messages):
+        yield token
+
+
+# ---------------------------------------------------------------------------
+# Public fallback‑aware stream_chat()
+# ---------------------------------------------------------------------------
+from .groq_provider import stream_chat as _groq_stream_chat
+
+async def stream_chat(messages: list[dict]) -> AsyncIterator[str]:
+    """Try Groq first, fall back to Ollama on any ModelUnavailableError."""
+    try:
+        logger.info("Attempting Groq LLM")
+        async for token in _groq_stream_chat(messages):
+            yield token
+        return
+    except ModelUnavailableError as exc:
+        logger.warning("Groq failed (%s) – falling back to Ollama", exc.__class__.__name__)
+    # Fallback to Ollama
+    async for token in _ollama_stream_chat(messages):
+        yield token
