@@ -218,102 +218,45 @@ async def chat(request: Request, req: ChatRequest):
         )
 
         async def event_stream():
-            request_start = time.perf_counter()
-            ttft_state: dict[str, float | None] = {"t": None}
-            yield f"data: {json.dumps({'conversation_id': conv_id})}\n\n"
+            # -------------------------------------------------
+            # Build the LangGraph state (only serialisable data)
+            # -------------------------------------------------
+            state: dict = {
+                "request_id": get_request_id(),
+                "question": req.message,
+                "history": [
+                    {"role": m.role, "content": m.content}
+                    for m in prior_history
+                ],
+                "use_documents": use_documents,
+                "retries": 0,
+            }
+
+            answer_parts: list[str] = []
+            final_sources: list[dict] | None = None
 
             try:
-                chunks: list[dict] | None = None
-                if use_documents:
-                    yield f"data: {json.dumps({'status': 'searching documents'})}\n\n"
-                    try:
-                        chunks = await retrieve_chunks(req.message, prior_history, metrics)
-                    except ModelUnavailableError:
-                        metrics.outcome = "error"
-                        metrics.total_s = round(time.perf_counter() - request_start, 4)
-                        yield f"data: {json.dumps({'error': MODEL_UNAVAILABLE_MESSAGE})}\n\n"
-                        _emit_audit(metrics)
-                        yield "data: [DONE]\n\n"
-                        return
-
-                    if chunks is not None and not chunks:
-                        metrics.outcome = "not_found"
-                        _record_first_token(request_start, ttft_state)
-                        metrics.first_token_s = ttft_state["t"]
-                        yield f"data: {json.dumps({'token': NOT_FOUND_MESSAGE})}\n\n"
-                        _save_assistant(conv_id, NOT_FOUND_MESSAGE)
-                        yield f"data: {json.dumps({'sources': []})}\n\n"
-                        metrics.answer_chars = len(NOT_FOUND_MESSAGE)
-                        metrics.total_s = round(time.perf_counter() - request_start, 4)
-                        _emit_audit(metrics)
-                        yield "data: [DONE]\n\n"
-                        return
-
-                if use_documents and chunks:
-                    llm_messages = build_messages(req.message, chunks, prior_history)
-                    metrics.prompt_chars = sum(len(m.get("content", "")) for m in llm_messages)
-                    parts: list[str] = []
-                    try:
-                        async for token in _stream_llm(llm_messages, settings.chat_temperature):
-                            _record_first_token(request_start, ttft_state)
-                            parts.append(token)
-                            yield f"data: {json.dumps({'token': token})}\n\n"
-                    except ModelUnavailableError:
-                        metrics.outcome = "error"
-                        metrics.total_s = round(time.perf_counter() - request_start, 4)
-                        yield f"data: {json.dumps({'error': MODEL_UNAVAILABLE_MESSAGE})}\n\n"
-                        _emit_audit(metrics)
-                        return
-                    except Exception:
-                        logger.exception("Chat generation failed")
-                        metrics.outcome = "error"
-                        metrics.total_s = round(time.perf_counter() - request_start, 4)
-                        yield f"data: {json.dumps({'error': 'Something went wrong'})}\n\n"
-                        _emit_audit(metrics)
-                        return
-                    answer = "".join(parts)
-                    metrics.answer_chars = len(answer)
-                    metrics.first_token_s = ttft_state["t"]
-                    sources_list = _sources_payload(chunks)["sources"]
-                    _save_assistant(conv_id, answer, sources_list)
-                    yield f"data: {json.dumps({'sources': sources_list})}\n\n"
-                    metrics.total_s = round(time.perf_counter() - request_start, 4)
-                    _emit_audit(metrics)
-                    yield "data: [DONE]\n\n"
-                    return
-
-                parts: list[str] = []
-                try:
-                    async for token in stream_chat(messages_for_llm):
-                        _record_first_token(request_start, ttft_state)
-                        parts.append(token)
-                        yield f"data: {json.dumps({'token': token})}\n\n"
-                except ModelUnavailableError:
-                    metrics.outcome = "error"
-                    metrics.total_s = round(time.perf_counter() - request_start, 4)
-                    yield f"data: {json.dumps({'error': MODEL_UNAVAILABLE_MESSAGE})}\n\n"
-                    _emit_audit(metrics)
-                    return
-                except Exception:
-                    logger.exception("Chat generation failed")
-                    metrics.outcome = "error"
-                    metrics.total_s = round(time.perf_counter() - request_start, 4)
-                    yield f"data: {json.dumps({'error': 'Something went wrong'})}\n\n"
-                    _emit_audit(metrics)
-                    return
-                answer = "".join(parts)
-                metrics.answer_chars = len(answer)
-                metrics.first_token_s = ttft_state["t"]
-                _save_assistant(conv_id, answer)
-                metrics.total_s = round(time.perf_counter() - request_start, 4)
-                _emit_audit(metrics)
-                yield "data: [DONE]\n\n"
+                async for event in rag_graph.astream(state, stream_mode="custom"):
+                    if "token" in event:
+                        answer_parts.append(event["token"])
+                        yield f"data: {json.dumps({'token': event['token']})}\n\n"
+                    elif "sources" in event:
+                        final_sources = event["sources"]
+                        yield f"data: {json.dumps({'sources': final_sources})}\n\n"
+                    elif "status" in event:
+                        yield f"data: {json.dumps({'status': event['status']})}\n\n"
+                    elif "error" in event:
+                        raise RuntimeError(event["error"])
             except Exception:
-                logger.exception("Unexpected chat stream error")
-                metrics.outcome = "error"
-                metrics.total_s = round(time.perf_counter() - request_start, 4)
+                logger.exception("Graph execution failed", exc_info=True)
+                # generic error event – front‑end expects a single error dict
                 yield f"data: {json.dumps({'error': 'Something went wrong'})}\n\n"
-                _emit_audit(metrics)
+            finally:
+                # Persist whatever we have collected (partial answer is okay on cancel)
+                answer_text = "".join(answer_parts)
+                _save_assistant(conv_id, answer_text, final_sources)
+                # End of stream marker (always sent, even on error)
+                yield "data: [DONE]\n\n"
 
         return StreamingResponse(
             event_stream(),

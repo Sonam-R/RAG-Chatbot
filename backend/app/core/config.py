@@ -21,8 +21,11 @@ class Settings(BaseSettings):
     groq_chat_model: str = "gemma2-9b-it"
 
     # ------------------------------------------------------------
-    # RAG‑specific configuration values.
+    # Feature toggles
     # ------------------------------------------------------------
+    enable_relevance_grading: bool = False
+    max_retrieval_retries: int = 1
+
     # Directory where ChromaDB will persist its vector collection.
     chroma_path: str = "./chroma_data"
     # Maximum size (in megabytes) allowed for a single uploaded document.
