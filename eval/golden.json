@@ -70,6 +70,34 @@
     "expected_keywords": ["chunks", "embedded", "retrieved"]
   },
   {
+    "id": "a11",
+    "group": "answerable",
+    "question": "What is Python and what kind of language is it?",
+    "expected_page": 2,
+    "expected_keywords": ["high-level", "programming"]
+  },
+  {
+    "id": "a12",
+    "group": "answerable",
+    "question": "How do I define a function in Python?",
+    "expected_page": 9,
+    "expected_keywords": ["def"]
+  },
+  {
+    "id": "a13",
+    "group": "answerable",
+    "question": "What is a Python module and why would I import one?",
+    "expected_page": 10,
+    "expected_keywords": ["module", "import"]
+  },
+  {
+    "id": "a14",
+    "group": "answerable",
+    "question": "What is HTTP used for when building APIs?",
+    "expected_page": 14,
+    "expected_keywords": ["http", "clients"]
+  },
+  {
     "id": "u1",
     "group": "unanswerable",
     "question": "What is a list comprehension and how do I write one?",
@@ -85,6 +113,42 @@
     "id": "u3",
     "group": "unanswerable",
     "question": "How do I deploy a Django app to AWS?",
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "u4",
+    "group": "unanswerable",
+    "question": "How do I use yield to write a generator function?",
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "u5",
+    "group": "unanswerable",
+    "question": "How do I use multiprocessing to speed up CPU-bound work?",
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "u6",
+    "group": "unanswerable",
+    "question": "How do I read a CSV file with pandas?",
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "u7",
+    "group": "unanswerable",
+    "question": "How do I configure pytest fixtures for unit tests?",
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "u8",
+    "group": "unanswerable",
+    "question": "What is the global interpreter lock (GIL) in CPython?",
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "u9",
+    "group": "unanswerable",
+    "question": "How do I build a desktop GUI with Tkinter?",
     "expected_behavior": "refuse"
   },
   {

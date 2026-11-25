@@ -12,3 +12,5 @@ class RAGState(TypedDict, total=False):
     answer: str
     relevant: bool
     retries: int
+    input_blocked: bool
+    block_reason: str

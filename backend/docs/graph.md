@@ -1,35 +1,40 @@
 # RAG StateGraph Overview
 
-The chatbot’s processing pipeline is now expressed as a **LangGraph `StateGraph`**.  
-All business‑logic (rewriter, embedder, vector store, prompt builder, LLM) lives in
-the individual nodes; the graph orchestrates the flow and decides which path to take.
+The chat pipeline is a **LangGraph `StateGraph`** (`app/graph/`). Nodes orchestrate retrieval, optional guardrails, generation, and refusals. The FastAPI chat route streams custom events via `rag_graph.astream(..., stream_mode="custom")`.
 
 ## Mermaid diagram
 
 ```mermaid
 flowchart TD
-    START -->|use_documents| rewrite
-    START -.->|!use_documents| plain_chat
+    START --> input_guard
+    START -.->|enable_input_guard=false| branch
+    input_guard -->|blocked| END
+    input_guard -->|ok| branch
+    branch -->|use_documents=false| plain_chat
+    branch -->|use_documents=true| rewrite
     rewrite --> retrieve
-    retrieve -->|hits| generate
     retrieve -->|no hits| refuse
-    generate --> END
+    retrieve -->|hits & no grading| generate
+    retrieve -->|hits & enable_relevance_grading| grade
+    grade -->|relevant| generate
+    grade -->|not relevant & retries left| rewrite
+    grade -->|not relevant & retries exhausted| refuse
+    generate -->|enable_output_check| output_check
+    generate -->|output check off| END
+    output_check --> END
     refuse --> END
     plain_chat --> END
-    %% Phase‑2 (optional, enabled via config)
-    retrieve -->|hits| grade
-    grade -->|relevant| generate
-    grade -->|not relevant & retries < max| rewrite
-    grade -->|not relevant & retries ≥ max| refuse
 ```
 
-## Node descriptions (5 lines)
+## Node descriptions
 
-* **`plain_chat`** – When `use_documents=False`, builds a simple system+history+user message and streams the LLM answer directly (no retrieval).  
-* **`rewrite`** – Calls `rewrite_question` to turn a follow‑up into a standalone query; skips when there is no prior history.  
-* **`retrieve`** – Embeds the (rewritten) question, searches the Chroma vector store (`vector_search`), filters by `min_score`, builds `context` and a `sources` payload, and emits a `{status}` event.  
-* **`grade`** (Phase‑2, enabled by `settings.enable_relevance_grading`) – Sends a short “yes/no” LLM prompt: “Does the context contain the answer?”; sets `state["relevant"]` and handles retry counting.  
-* **`generate`** – Constructs the final grounded prompt with `build_messages`, streams tokens from `stream_chat`, and finally emits the `{sources}` payload.  
-* **`refuse`** – When no hits survive the score filter (or after exhausted retries), streams the “I couldn't find that …” message as token events and sends an empty `sources` list.
+* **`input_guard`** (flag: `enable_input_guard`) – Normalises the question (control chars, length), applies a small regex injection speed bump, and on block streams `I can't help with that request.` plus `{status: blocked}` without calling retrieval or the LLM. Logs the pattern name only.
+* **`plain_chat`** – When `use_documents=False`, streams a normal chat completion (no RAG).
+* **`rewrite`** – Standalone query via `rewrite_question`; on retrieval retry uses the original question for a broader search.
+* **`retrieve`** – Embeds, searches Chroma, filters by `min_score`, builds context/sources, emits `{status}`.
+* **`grade`** (flag: `enable_relevance_grading`) – One temperature-0 `complete()` yes/no relevance check on top chunks; fail-open on errors; may loop to `rewrite` until `max_retrieval_retries`. Emits `Checking relevance...`.
+* **`generate`** – `build_messages` (optionally reordered) + streamed answer; emits tokens and sources.
+* **`output_check`** (flag: `enable_output_check`) – Post-stream citation/number checks only; emits `{verification}`; never changes the answer.
+* **`refuse`** – Streams `I couldn't find that in the uploaded documents.` with empty sources (no answer LLM).
 
-The graph is compiled once (`rag_graph = build_graph()`) in `app/graph/builder.py` and invoked from the FastAPI chat endpoint via `rag_graph.astream(state, stream_mode="custom")`. This keeps the observable SSE behaviour unchanged while giving us a clear, extensible workflow.
+Guardrail logic lives in `app/graph/guards.py`. The graph is compiled once at import in `app/graph/builder.py`; changing flags requires a process restart.

@@ -21,10 +21,17 @@ class Settings(BaseSettings):
     groq_chat_model: str = "gemma2-9b-it"
 
     # ------------------------------------------------------------
-    # Feature toggles
+    # Feature toggles (guardrails; default off — identical to baseline when all false)
     # ------------------------------------------------------------
+    enable_input_guard: bool = False
     enable_relevance_grading: bool = False
+    enable_output_check: bool = False
+    enable_prompt_reorder: bool = False
+    grade_max_chunks: int = 3
+    grade_timeout_s: int = 15
     max_retrieval_retries: int = 1
+    grade_skip_score: float | None = None
+    max_question_chars: int = 2000
 
     # Directory where ChromaDB will persist its vector collection.
     chroma_path: str = "./chroma_data"

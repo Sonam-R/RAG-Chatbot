@@ -27,6 +27,7 @@ async def stream_chat(messages: list[dict]) -> AsyncIterator[str]:
         stream = await _groq_client.chat.completions.create(
             model=settings.groq_chat_model,
             messages=[{"role": "system", "content": SYSTEM_PROMPT}, *messages],
+            temperature=settings.chat_temperature,
             stream=True,
         )
     except Exception as exc:

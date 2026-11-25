@@ -47,6 +47,7 @@ async def _ollama_stream_chat(messages: list[dict]) -> AsyncIterator[str]:
         stream = await client.chat.completions.create(
             model=settings.chat_model,
             messages=[{"role": "system", "content": SYSTEM_PROMPT}, *messages],
+            temperature=settings.chat_temperature,
             stream=True,
             extra_body=_ollama_extra(),
         )
@@ -74,10 +75,9 @@ async def _ollama_stream_chat(messages: list[dict]) -> AsyncIterator[str]:
             raise ModelUnavailableError() from exc
         raise
 
-# ---------------------------------------------------------------------------
-# Public fallback‑aware stream_chat()
-# ---------------------------------------------------------------------------
+
 from .groq_provider import stream_chat as _groq_stream_chat
+
 
 async def stream_chat(messages: list[dict]) -> AsyncIterator[str]:
     """Try Groq first, fall back to Ollama on any ModelUnavailableError."""
@@ -86,27 +86,62 @@ async def stream_chat(messages: list[dict]) -> AsyncIterator[str]:
         async for token in _groq_stream_chat(messages):
             yield token
         return
-    except ModelUnavailableError as exc:
-        logger.warning("Groq failed (%s) – falling back to Ollama", exc.__class__.__name__)
-    # Fallback to Ollama
+    except ModelUnavailableError:
+        logger.warning("Groq failed – falling back to Ollama")
     async for token in _ollama_stream_chat(messages):
         yield token
 
 
-# ---------------------------------------------------------------------------
-# Public fallback‑aware stream_chat()
-# ---------------------------------------------------------------------------
-from .groq_provider import stream_chat as _groq_stream_chat
+async def _groq_complete(messages: list[dict], temperature: float) -> str:
+    from .groq_provider import _groq_client
 
-async def stream_chat(messages: list[dict]) -> AsyncIterator[str]:
-    """Try Groq first, fall back to Ollama on any ModelUnavailableError."""
     try:
-        logger.info("Attempting Groq LLM")
-        async for token in _groq_stream_chat(messages):
-            yield token
-        return
-    except ModelUnavailableError as exc:
-        logger.warning("Groq failed (%s) – falling back to Ollama", exc.__class__.__name__)
-    # Fallback to Ollama
-    async for token in _ollama_stream_chat(messages):
-        yield token
+        resp = await _groq_client.chat.completions.create(
+            model=settings.groq_chat_model,
+            messages=messages,
+            temperature=temperature,
+            stream=False,
+        )
+    except Exception as exc:
+        try:
+            map_openai_error(exc)
+        except ModelUnavailableError:
+            raise
+        if isinstance(exc, (APIConnectionError, APITimeoutError)):
+            raise ModelUnavailableError() from exc
+        raise ModelUnavailableError() from exc
+    if not resp.choices:
+        return ""
+    return resp.choices[0].message.content or ""
+
+
+async def _ollama_complete(messages: list[dict], temperature: float) -> str:
+    try:
+        resp = await client.chat.completions.create(
+            model=settings.chat_model,
+            messages=messages,
+            temperature=temperature,
+            stream=False,
+            extra_body=_ollama_extra(),
+        )
+    except Exception as exc:
+        try:
+            map_openai_error(exc)
+        except ModelUnavailableError:
+            raise
+        if isinstance(exc, (APIConnectionError, APITimeoutError)):
+            raise ModelUnavailableError() from exc
+        raise
+    if not resp.choices:
+        return ""
+    return resp.choices[0].message.content or ""
+
+
+async def complete(messages: list[dict], *, temperature: float = 0.0) -> str:
+    """Single non-streaming completion; Groq first, then Ollama. No extra system prompt."""
+    if settings.groq_api_key:
+        try:
+            return await _groq_complete(messages, temperature)
+        except ModelUnavailableError:
+            logger.warning("Groq complete failed – falling back to Ollama")
+    return await _ollama_complete(messages, temperature)

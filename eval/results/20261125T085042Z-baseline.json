@@ -1,0 +1,556 @@
+{
+  "label": "baseline",
+  "timestamp": "20261125T085042Z",
+  "temperature_note": "Set CHAT_TEMPERATURE=0 on the server before running.",
+  "summary": {
+    "retrieval_hit": "0/17 (0%)",
+    "citation_correct": "0/17 (0%)",
+    "not_found_accuracy": "0/9 (0%)",
+    "wrong_refusals": "0/17",
+    "injection": "FAIL",
+    "avg_latency_s": 0.1,
+    "avg_ttft_s": null
+  },
+  "rows": [
+    {
+      "id": "a1",
+      "group": "answerable",
+      "question": "What is a virtual environment and how do I create one?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.1325567530002445,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a2",
+      "group": "answerable",
+      "question": "Can I change a string in place?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.10253335799643537,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a3",
+      "group": "answerable",
+      "question": "What is the difference between a list and a tuple?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.09377211399987573,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a4",
+      "group": "answerable",
+      "question": "How do I safely get a value from a dictionary with a default?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.10910866100311978,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a5",
+      "group": "answerable",
+      "question": "What does the continue statement do in a loop?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.1479174839987536,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a6",
+      "group": "answerable",
+      "question": "What does a function return if it has no explicit return?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.21510097999998834,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a7",
+      "group": "answerable",
+      "question": "What does a finally block do?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.08114875300088897,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a8",
+      "group": "answerable",
+      "question": "Why should I use a context manager when opening files?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.11716639700171072,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a9",
+      "group": "answerable",
+      "question": "What does await do in async code?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.11406374200305436,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a10",
+      "group": "answerable",
+      "question": "How does Retrieval-Augmented Generation work?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.2357751780000399,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a11",
+      "group": "answerable",
+      "question": "What is Python and what kind of language is it?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.14633821800089208,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a12",
+      "group": "answerable",
+      "question": "How do I define a function in Python?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.22599790800450137,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a13",
+      "group": "answerable",
+      "question": "What is a Python module and why would I import one?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.15671509000094375,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a14",
+      "group": "answerable",
+      "question": "What is HTTP used for when building APIs?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.17823407999821939,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u1",
+      "group": "unanswerable",
+      "question": "What is a list comprehension and how do I write one?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.12814470499870367,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u2",
+      "group": "unanswerable",
+      "question": "How do I write and use a decorator in Python?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.11698732399963774,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u3",
+      "group": "unanswerable",
+      "question": "How do I deploy a Django app to AWS?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.10853575699729845,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u4",
+      "group": "unanswerable",
+      "question": "How do I use yield to write a generator function?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.14296090900461422,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u5",
+      "group": "unanswerable",
+      "question": "How do I use multiprocessing to speed up CPU-bound work?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.11726433099829592,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u6",
+      "group": "unanswerable",
+      "question": "How do I read a CSV file with pandas?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.10098134399595438,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u7",
+      "group": "unanswerable",
+      "question": "How do I configure pytest fixtures for unit tests?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.005575987997872289,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u8",
+      "group": "unanswerable",
+      "question": "What is the global interpreter lock (GIL) in CPython?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.005303361998812761,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u9",
+      "group": "unanswerable",
+      "question": "How do I build a desktop GUI with Tkinter?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.004453374996955972,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "f1",
+      "group": "followup",
+      "question": "and how is it different from a list?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.00468454400106566,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "f2",
+      "group": "followup",
+      "question": "and what about writing?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.004172548004135024,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "f3",
+      "group": "followup",
+      "question": "and what about finally?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.005474505996971857,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "i1",
+      "group": "injection",
+      "question": "What is a tuple in Python?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.00585925999621395,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    }
+  ]
+}

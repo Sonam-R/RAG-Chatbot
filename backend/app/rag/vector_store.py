@@ -17,7 +17,7 @@ def search(query_embedding: list[float], k: int) -> list[dict]:
     res = _collection.query(
         query_embeddings=[query_embedding],
         n_results=k,
-        include=["documents", "metadatas", "distances", "ids"],
+        include=["documents", "metadatas", "distances"],
     )
     hits: list[dict] = []
     for chunk_id, doc, meta, dist in zip(

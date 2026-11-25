@@ -22,6 +22,7 @@ from app.rag.prompt import NOT_FOUND_MESSAGE, build_messages
 from app.rag.rewriter import rewrite_question
 from app.rag.vector_store import search as vector_search
 from app.llm.provider import client, stream_chat
+from app.graph.builder import rag_graph
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api")
@@ -237,6 +238,8 @@ async def chat(request: Request, req: ChatRequest):
 
             try:
                 async for event in rag_graph.astream(state, stream_mode="custom"):
+                    if not isinstance(event, dict):
+                        continue
                     if "token" in event:
                         answer_parts.append(event["token"])
                         yield f"data: {json.dumps({'token': event['token']})}\n\n"
@@ -245,6 +248,8 @@ async def chat(request: Request, req: ChatRequest):
                         yield f"data: {json.dumps({'sources': final_sources})}\n\n"
                     elif "status" in event:
                         yield f"data: {json.dumps({'status': event['status']})}\n\n"
+                    elif "verification" in event:
+                        yield f"data: {json.dumps({'verification': event['verification']})}\n\n"
                     elif "error" in event:
                         raise RuntimeError(event["error"])
             except Exception:

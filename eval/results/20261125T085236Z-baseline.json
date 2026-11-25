@@ -1,0 +1,974 @@
+{
+  "label": "baseline",
+  "timestamp": "20261125T085236Z",
+  "temperature_note": "Set CHAT_TEMPERATURE=0 on the server before running.",
+  "summary": {
+    "retrieval_hit": "14/17 (82%)",
+    "citation_correct": "5/17 (29%)",
+    "not_found_accuracy": "0/9 (0%)",
+    "wrong_refusals": "0/17",
+    "injection": "FAIL",
+    "avg_latency_s": 1.41,
+    "avg_ttft_s": 1.87
+  },
+  "rows": [
+    {
+      "id": "a1",
+      "group": "answerable",
+      "question": "What is a virtual environment and how do I create one?",
+      "answer": "A virtual environment is an isolated Python environment that keeps a project\u2019s dependencies separate from those of other projects and from the system\u2011wide packages. It lets you install and manage packages without affecting other code bases.\n\nTo create a virtual environment, run the following command in your project directory:\n\n```bash\npython3 -m venv .venv\n```\n\nAfter creating it, activate the environment (the activation step varies by operating system) before installing any packages. This information is taken from the Python basics knowledge base\u202f[1][2].",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 3,
+          "snippet": "Page 3\n2. Installing Python and Running Code\nInterpreter\nThe Python interpreter executes Python code. You can run scripts from a terminal or use an\ninteractive shell to experiment with individual statements.\nScripts\nA Python file typically uses the .py extension. For example, save print('Hello') in hello.py and run it\nusing python hello.py, or python3 hello.py depending on your system.\nVirtual environments\nA virtual environment isolates project dependencies. Create one with python3 -m venv .venv and\nactivate it before installing packages.",
+          "score": 0.614
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 3,
+          "snippet": "Page 3\n2. Installing Python and Running Code\nInterpreter\nThe Python interpreter executes Python code. You can run scripts from a terminal or use an\ninteractive shell to experiment with individual statements.\nScripts\nA Python file typically uses the .py extension. For example, save print('Hello') in hello.py and run it\nusing python hello.py, or python3 hello.py depending on your system.\nVirtual environments\nA virtual environment isolates project dependencies. Create one with python3 -m venv .venv and\nactivate it before installing packages.",
+          "score": 0.614
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 17,
+          "snippet": "Page 17\n16. Practice and Review\nPractice tasks\nWrite a function that counts words in a sentence. Create a dictionary-based contact list. Read a text\nfile and report the number of lines. Build a small API endpoint that accepts a message.\nGood habits\nUse meaningful names, small functions, clear error handling, virtual environments, and version\ncontrol. Test behavior rather than relying only on assumptions.\nNext steps\nExplore FastAPI, SQLAlchemy, Pydantic, HTTPX, embeddings, vector databases, and a locally\nhosted model such as Ollama to deepen your chatbot development skills.",
+          "score": 0.542
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.614,
+        "ttft": 0.8511744659990654,
+        "latency": 1.0828738889977103,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": true,
+        "keywords_ok": false,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a2",
+      "group": "answerable",
+      "question": "Can I change a string in place?",
+      "answer": "No. In Python strings are immutable, so their contents cannot be changed in place\u30101\u2020L1-L3\u3011.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 5,
+          "snippet": "Page 5\n4. Strings\nCreating strings\nStrings are text values written using single, double, or triple quotes. Strings are immutable, meaning\ntheir contents cannot be changed in place.\nOperations\nStrings support concatenation, repetition, indexing, slicing, and methods such as lower(), upper(),\nstrip(), replace(), and split().\nFormatting\nF-strings provide a convenient way to embed expressions in text, such as f'Hello, {name}'.",
+          "score": 0.675
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 5,
+          "snippet": "Page 5\n4. Strings\nCreating strings\nStrings are text values written using single, double, or triple quotes. Strings are immutable, meaning\ntheir contents cannot be changed in place.\nOperations\nStrings support concatenation, repetition, indexing, slicing, and methods such as lower(), upper(),\nstrip(), replace(), and split().\nFormatting\nF-strings provide a convenient way to embed expressions in text, such as f'Hello, {name}'.",
+          "score": 0.675
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 8,
+          "snippet": "Page 8\n7. Conditions and Loops\nConditional logic\nif, elif, and else allow a program to select different paths based on conditions.\nFor loops\nA for loop iterates over items in an iterable such as a list, string, dictionary, or range.\nWhile loops\nA while loop repeats as long as its condition remains true. Ensure the condition can eventually\nbecome false to avoid unintended infinite loops.\nLoop controls\nbreak exits a loop, continue skips to the next iteration, and pass acts as a placeholder.",
+          "score": 0.546
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.675,
+        "ttft": 0.5664530840003863,
+        "latency": 0.6464622720013722,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": false,
+        "keywords_ok": true,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a3",
+      "group": "answerable",
+      "question": "What is the difference between a list and a tuple?",
+      "answer": "A list is an ordered **mutable** collection, meaning you can change its contents after it\u2019s created (e.g., using\u202fappend(), remove(), pop(), or slicing). A tuple, by contrast, is an ordered collection that is **immutable**\u2014once a tuple is created its elements cannot be altered. Both can hold values of different types, but lists allow modification while tuples do not\u30101\u2020L1-L4\u3011.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 6,
+          "snippet": "Page 6\n5. Lists and Tuples\nLists\nA list is an ordered, mutable collection. Lists can contain values of different types, though using\nconsistent types often makes code easier to maintain.\nList operations\nUse append() to add an item, remove() to remove a matching item, pop() to remove and return an\nitem, and slicing to select a range.\nTuples\nA tuple is an ordered collection that cannot be modified after creation. Tuples are useful for fixed\ncollections of values.",
+          "score": 0.843
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 6,
+          "snippet": "Page 6\n5. Lists and Tuples\nLists\nA list is an ordered, mutable collection. Lists can contain values of different types, though using\nconsistent types often makes code easier to maintain.\nList operations\nUse append() to add an item, remove() to remove a matching item, pop() to remove and return an\nitem, and slicing to select a range.\nTuples\nA tuple is an ordered collection that cannot be modified after creation. Tuples are useful for fixed\ncollections of values.",
+          "score": 0.843
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 7,
+          "snippet": "Page 7\n6. Dictionaries and Sets\nDictionaries\nA dictionary stores key-value pairs. Keys are unique and are used to retrieve associated values.\nDictionaries are often used to represent structured records.\nDictionary methods\nget() safely retrieves a value with an optional default. keys(), values(), and items() provide views of\ndictionary contents.\nSets\nA set stores unique values and supports operations such as union, intersection, and difference. Sets\nare useful for removing duplicates and membership checks.",
+          "score": 0.602
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.843,
+        "ttft": 0.46678517300460953,
+        "latency": 0.6527611560013611,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": false,
+        "keywords_ok": true,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a4",
+      "group": "answerable",
+      "question": "How do I safely get a value from a dictionary with a default?",
+      "answer": "You can use the dictionary\u2019s **`get()`** method, which returns the value for a given key if it exists, and returns a default you specify when the key is missing.  \n\n```python\nmy_dict = {\"a\": 1, \"b\": 2}\nvalue = my_dict.get(\"c\", 0)   # returns 0 because \"c\" isn\u2019t in the dict\n```\n\nThe `get()` call \u201csafely retrieves a value with an optional default\u201d\u30101\u3011. This avoids a `KeyError` that would occur if you accessed the key directly with `my_dict[\"c\"]`.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 7,
+          "snippet": "Page 7\n6. Dictionaries and Sets\nDictionaries\nA dictionary stores key-value pairs. Keys are unique and are used to retrieve associated values.\nDictionaries are often used to represent structured records.\nDictionary methods\nget() safely retrieves a value with an optional default. keys(), values(), and items() provide views of\ndictionary contents.\nSets\nA set stores unique values and supports operations such as union, intersection, and difference. Sets\nare useful for removing duplicates and membership checks.",
+          "score": 0.697
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 7,
+          "snippet": "Page 7\n6. Dictionaries and Sets\nDictionaries\nA dictionary stores key-value pairs. Keys are unique and are used to retrieve associated values.\nDictionaries are often used to represent structured records.\nDictionary methods\nget() safely retrieves a value with an optional default. keys(), values(), and items() provide views of\ndictionary contents.\nSets\nA set stores unique values and supports operations such as union, intersection, and difference. Sets\nare useful for removing duplicates and membership checks.",
+          "score": 0.697
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 9,
+          "snippet": "Page 9\n8. Functions\nDefining functions\nUse def to create a function. Functions help organize code into reusable units with clear\nresponsibilities.\nParameters and return\nParameters receive inputs and return sends a result back to the caller. A function without an explicit\nreturn value returns None.\nScope\nLocal variables exist within a function's scope. Avoid relying excessively on global variables\nbecause they make behavior harder to reason about.\nDefault and keyword arguments\nFunctions can define default values and callers can pass arguments by name. Mutable defaults\nshould generally be avoided.",
+          "score": 0.638
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.697,
+        "ttft": 0.5773609080060851,
+        "latency": 0.847708067005442,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": false,
+        "keywords_ok": true,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a5",
+      "group": "answerable",
+      "question": "What does the continue statement do in a loop?",
+      "answer": "The `continue` statement skips the rest of the current loop iteration and moves directly to the next iteration of the loop\u30101\u3011.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 8,
+          "snippet": "Page 8\n7. Conditions and Loops\nConditional logic\nif, elif, and else allow a program to select different paths based on conditions.\nFor loops\nA for loop iterates over items in an iterable such as a list, string, dictionary, or range.\nWhile loops\nA while loop repeats as long as its condition remains true. Ensure the condition can eventually\nbecome false to avoid unintended infinite loops.\nLoop controls\nbreak exits a loop, continue skips to the next iteration, and pass acts as a placeholder.",
+          "score": 0.74
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 8,
+          "snippet": "Page 8\n7. Conditions and Loops\nConditional logic\nif, elif, and else allow a program to select different paths based on conditions.\nFor loops\nA for loop iterates over items in an iterable such as a list, string, dictionary, or range.\nWhile loops\nA while loop repeats as long as its condition remains true. Ensure the condition can eventually\nbecome false to avoid unintended infinite loops.\nLoop controls\nbreak exits a loop, continue skips to the next iteration, and pass acts as a placeholder.",
+          "score": 0.74
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 15,
+          "snippet": "Page 15\n14. Async Python\nAsync functions\nasync def declares a coroutine function. Calling it creates a coroutine that generally needs to be\nawaited or scheduled.\nAwait\nawait pauses the current coroutine while an asynchronous operation completes, allowing the event\nloop to run other tasks.\nUse cases\nAsync is particularly useful for I/O-bound work such as network calls, API requests, and database\noperations when supported by the libraries involved.",
+          "score": 0.605
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.74,
+        "ttft": 0.7539419879976776,
+        "latency": 0.7985394229981466,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": false,
+        "keywords_ok": true,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a6",
+      "group": "answerable",
+      "question": "What does a function return if it has no explicit return?",
+      "answer": "A function that doesn\u2019t include an explicit\u202f`return` statement will return\u202f`None` by default.\u202f[1][2]",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 9,
+          "snippet": "Page 9\n8. Functions\nDefining functions\nUse def to create a function. Functions help organize code into reusable units with clear\nresponsibilities.\nParameters and return\nParameters receive inputs and return sends a result back to the caller. A function without an explicit\nreturn value returns None.\nScope\nLocal variables exist within a function's scope. Avoid relying excessively on global variables\nbecause they make behavior harder to reason about.\nDefault and keyword arguments\nFunctions can define default values and callers can pass arguments by name. Mutable defaults\nshould generally be avoided.",
+          "score": 0.697
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 9,
+          "snippet": "Page 9\n8. Functions\nDefining functions\nUse def to create a function. Functions help organize code into reusable units with clear\nresponsibilities.\nParameters and return\nParameters receive inputs and return sends a result back to the caller. A function without an explicit\nreturn value returns None.\nScope\nLocal variables exist within a function's scope. Avoid relying excessively on global variables\nbecause they make behavior harder to reason about.\nDefault and keyword arguments\nFunctions can define default values and callers can pass arguments by name. Mutable defaults\nshould generally be avoided.",
+          "score": 0.697
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 4,
+          "snippet": "Page 4\n3. Variables and Data Types\nVariables\nVariables are names that refer to values. Python does not require you to declare a variable's type\nexplicitly.\nBasic types\nCommon built-in types include int for integers, float for decimal numbers, str for text, bool for truth\nvalues, and NoneType for the absence of a value.\nType conversion\nFunctions such as int(), float(), and str() convert values when conversion is valid. Conversion errors\ncan occur when the input cannot be interpreted as the requested type.",
+          "score": 0.563
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.697,
+        "ttft": 0.732745146000525,
+        "latency": 0.7778993970059673,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": true,
+        "keywords_ok": true,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a7",
+      "group": "answerable",
+      "question": "What does a finally block do?",
+      "answer": "A\u202ffinally\u202fblock runs during the cleanup phase of a\u202ftry\u2011except\u202fstatement, executing whether the\u202ftry\u202fblock completes normally or raises an exception. It\u2019s typically used to release resources or perform other necessary cleanup actions\u30101\u3011.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 11,
+          "snippet": "Page 11\n10. Exceptions and Error Handling\nExceptions\nExceptions represent errors or unusual conditions that interrupt normal execution.\nTry and except\nUse try to wrap operations that may fail and except to handle specific exception types. Avoid\ncatching every exception without a reason.\nFinally\nA finally block executes during cleanup whether the try block succeeds or raises an exception. It is\nuseful for releasing resources.\nRaise\nraise allows code to signal an error explicitly when a condition cannot be handled appropriately.",
+          "score": 0.541
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 11,
+          "snippet": "Page 11\n10. Exceptions and Error Handling\nExceptions\nExceptions represent errors or unusual conditions that interrupt normal execution.\nTry and except\nUse try to wrap operations that may fail and except to handle specific exception types. Avoid\ncatching every exception without a reason.\nFinally\nA finally block executes during cleanup whether the try block succeeds or raises an exception. It is\nuseful for releasing resources.\nRaise\nraise allows code to signal an error explicitly when a condition cannot be handled appropriately.",
+          "score": 0.541
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 8,
+          "snippet": "Page 8\n7. Conditions and Loops\nConditional logic\nif, elif, and else allow a program to select different paths based on conditions.\nFor loops\nA for loop iterates over items in an iterable such as a list, string, dictionary, or range.\nWhile loops\nA while loop repeats as long as its condition remains true. Ensure the condition can eventually\nbecome false to avoid unintended infinite loops.\nLoop controls\nbreak exits a loop, continue skips to the next iteration, and pass acts as a placeholder.",
+          "score": 0.526
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.541,
+        "ttft": 0.6275619189982535,
+        "latency": 0.774760154003161,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": false,
+        "keywords_ok": true,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a8",
+      "group": "answerable",
+      "question": "Why should I use a context manager when opening files?",
+      "answer": "Using a context manager (the\u202f`with`\u202fstatement) when opening files ensures that the file is automatically closed when the block finishes. This guarantees proper cleanup of the file resource and avoids leaving files open unintentionally\u30101\u2020L1-L3\u3011.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 13,
+          "snippet": "Page 13\n12. Working with Files\nReading\nUse open() with an appropriate mode to read a file. Context managers, written with with, ensure files\nare closed properly.\nWriting\nWrite mode replaces existing content; append mode adds content. Choose modes carefully to avoid\nunintentionally overwriting data.\nPaths\nThe pathlib module provides convenient, cross-platform path handling.",
+          "score": 0.752
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 13,
+          "snippet": "Page 13\n12. Working with Files\nReading\nUse open() with an appropriate mode to read a file. Context managers, written with with, ensure files\nare closed properly.\nWriting\nWrite mode replaces existing content; append mode adds content. Choose modes carefully to avoid\nunintentionally overwriting data.\nPaths\nThe pathlib module provides convenient, cross-platform path handling.",
+          "score": 0.752
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 10,
+          "snippet": "Page 10\n9. Modules and Packages\nModules\nA module is a Python file that can be imported into another file. Importing enables code reuse and\nseparation of concerns.\nPackages\nPackages organize related modules into directories. Projects often use packages to group API\nroutes, services, configuration, and data access.\nImports\nImports should be clear and consistent. Avoid circular imports, where modules depend on each\nother in a cycle.",
+          "score": 0.563
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.752,
+        "ttft": 0.6014103759953286,
+        "latency": 0.7483317769947462,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": false,
+        "keywords_ok": true,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a9",
+      "group": "answerable",
+      "question": "What does await do in async code?",
+      "answer": "`await` pauses the currently running coroutine while an asynchronous operation finishes, letting the event loop continue running other tasks in the meantime\u30101\u2020L4-L5\u3011.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 15,
+          "snippet": "Page 15\n14. Async Python\nAsync functions\nasync def declares a coroutine function. Calling it creates a coroutine that generally needs to be\nawaited or scheduled.\nAwait\nawait pauses the current coroutine while an asynchronous operation completes, allowing the event\nloop to run other tasks.\nUse cases\nAsync is particularly useful for I/O-bound work such as network calls, API requests, and database\noperations when supported by the libraries involved.",
+          "score": 0.785
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 15,
+          "snippet": "Page 15\n14. Async Python\nAsync functions\nasync def declares a coroutine function. Calling it creates a coroutine that generally needs to be\nawaited or scheduled.\nAwait\nawait pauses the current coroutine while an asynchronous operation completes, allowing the event\nloop to run other tasks.\nUse cases\nAsync is particularly useful for I/O-bound work such as network calls, API requests, and database\noperations when supported by the libraries involved.",
+          "score": 0.785
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 8,
+          "snippet": "Page 8\n7. Conditions and Loops\nConditional logic\nif, elif, and else allow a program to select different paths based on conditions.\nFor loops\nA for loop iterates over items in an iterable such as a list, string, dictionary, or range.\nWhile loops\nA while loop repeats as long as its condition remains true. Ensure the condition can eventually\nbecome false to avoid unintended infinite loops.\nLoop controls\nbreak exits a loop, continue skips to the next iteration, and pass acts as a placeholder.",
+          "score": 0.582
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.785,
+        "ttft": 0.6766599669936113,
+        "latency": 0.7125376069961931,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": false,
+        "keywords_ok": true,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a10",
+      "group": "answerable",
+      "question": "How does Retrieval-Augmented Generation work?",
+      "answer": "Retrieval\u2011Augmented Generation (RAG) works by first pulling relevant information from an external knowledge base and then feeding that retrieved content into a language model\u2019s prompt so the model can use it while generating its answer. The typical workflow is:\n\n1. **Chunking** \u2013 The source documents are broken into smaller pieces (chunks).  \n2. **Embedding & Indexing** \u2013 Each chunk is transformed into a vector embedding and stored in an index that supports similarity search.  \n3. **Retrieval** \u2013 When a user query arrives, the system computes an embedding for the query, searches the index, and selects the most relevant chunks.  \n4. **Prompt Augmentation** \u2013 The retrieved chunks are inserted into the prompt sent to the large language model (LLM).  \n5. **Generation** \u2013 The LLM generates its response, now grounded in the up\u2011to\u2011date factual material from the knowledge base.\n\nThis combination lets the model produce answers that are both fluent (thanks to the LLM) and factually accurate (thanks to the retrieved documents)\u202f[1][2].",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 16,
+          "snippet": "Page 16\n15. Python for AI Chatbots\nBackend role\nPython can provide API endpoints, manage chat sessions, validate requests, and coordinate model\ncalls.\nLLMs\nA large language model generates text based on input and context. A backend can send a\nsequence of messages to a model and receive a response.\nStreaming\nStreaming lets a backend forward response chunks as they arrive, improving perceived\nresponsiveness.\nRAG\nRetrieval-Augmented Generation combines retrieval of relevant information from a knowledge base\nwith a model's generation process. Documents are typically split into chunks, embedded, indexed,\nretrieved, and included in the prompt.\nPractical architecture\nA basic chatbot may include a frontend, API backend, conversation storage, an LLM provider,\nand\u2014when using RAG\u2014a document ingestion and retrieval pipeline.",
+          "score": 0.634
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 16,
+          "snippet": "Page 16\n15. Python for AI Chatbots\nBackend role\nPython can provide API endpoints, manage chat sessions, validate requests, and coordinate model\ncalls.\nLLMs\nA large language model generates text based on input and context. A backend can send a\nsequence of messages to a model and receive a response.\nStreaming\nStreaming lets a backend forward response chunks as they arrive, improving perceived\nresponsiveness.\nRAG\nRetrieval-Augmented Generation combines retrieval of relevant information from a knowledge base\nwith a model's generation process. Documents are typically split into chunks, embedded, indexed,\nretrieved, and included in the prompt.\nPractical architecture\nA basic chatbot may include a frontend, API backend, conversation storage, an LLM provider,\nand\u2014when using RAG\u2014a document ingestion and retrieval pipeline.",
+          "score": 0.634
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 1,
+          "snippet": "Page 1\n Python Basics\n A Text-Based Knowledge Document for Learning and Chatbot / RAG Practice\nThis guide covers Python fundamentals, APIs, asynchronous programming, and introductory\nconcepts for AI chatbots and Retrieval-Augmented Generation (RAG). It is designed as a\nsearchable, selectable-text PDF.",
+          "score": 0.592
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.634,
+        "ttft": 0.6480595240063849,
+        "latency": 1.1349479910059017,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": true,
+        "keywords_ok": false,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a11",
+      "group": "answerable",
+      "question": "What is Python and what kind of language is it?",
+      "answer": "Python is a high-level, general\u2011purpose programming language that is known for its readable syntax\u30101\u3011.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 2,
+          "snippet": "Page 2\n1. Introduction to Python\nWhat is Python?\nPython is a high-level, general-purpose programming language known for readable syntax. It is\nused in web development, automation, data analysis, artificial intelligence, and scripting.\nWhy Python is popular\nPython emphasizes readability and has a large ecosystem of libraries. Developers can often\nexpress an idea in fewer lines than in many other languages, making it useful for prototyping and\nlearning.\nWhere Python is used\nCommon areas include backend services, data science, machine learning, automation, testing,\nscientific computing, and command-line tools.",
+          "score": 0.866
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 2,
+          "snippet": "Page 2\n1. Introduction to Python\nWhat is Python?\nPython is a high-level, general-purpose programming language known for readable syntax. It is\nused in web development, automation, data analysis, artificial intelligence, and scripting.\nWhy Python is popular\nPython emphasizes readability and has a large ecosystem of libraries. Developers can often\nexpress an idea in fewer lines than in many other languages, making it useful for prototyping and\nlearning.\nWhere Python is used\nCommon areas include backend services, data science, machine learning, automation, testing,\nscientific computing, and command-line tools.",
+          "score": 0.866
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 1,
+          "snippet": "Page 1\n Python Basics\n A Text-Based Knowledge Document for Learning and Chatbot / RAG Practice\nThis guide covers Python fundamentals, APIs, asynchronous programming, and introductory\nconcepts for AI chatbots and Retrieval-Augmented Generation (RAG). It is designed as a\nsearchable, selectable-text PDF.",
+          "score": 0.747
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.866,
+        "ttft": 0.602362853998784,
+        "latency": 0.6538017009952455,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": false,
+        "keywords_ok": true,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a12",
+      "group": "answerable",
+      "question": "How do I define a function in Python?",
+      "answer": "To define a function in Python, use the **`def`** keyword followed by the function name and parentheses for any parameters. For example:\n\n```python\ndef my_function(param1, param2):\n    # function body\n    return result\n```\n\nThe `def` statement creates a reusable block of code with a clear responsibility.\u202f[1]",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 9,
+          "snippet": "Page 9\n8. Functions\nDefining functions\nUse def to create a function. Functions help organize code into reusable units with clear\nresponsibilities.\nParameters and return\nParameters receive inputs and return sends a result back to the caller. A function without an explicit\nreturn value returns None.\nScope\nLocal variables exist within a function's scope. Avoid relying excessively on global variables\nbecause they make behavior harder to reason about.\nDefault and keyword arguments\nFunctions can define default values and callers can pass arguments by name. Mutable defaults\nshould generally be avoided.",
+          "score": 0.756
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 9,
+          "snippet": "Page 9\n8. Functions\nDefining functions\nUse def to create a function. Functions help organize code into reusable units with clear\nresponsibilities.\nParameters and return\nParameters receive inputs and return sends a result back to the caller. A function without an explicit\nreturn value returns None.\nScope\nLocal variables exist within a function's scope. Avoid relying excessively on global variables\nbecause they make behavior harder to reason about.\nDefault and keyword arguments\nFunctions can define default values and callers can pass arguments by name. Mutable defaults\nshould generally be avoided.",
+          "score": 0.756
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 4,
+          "snippet": "Page 4\n3. Variables and Data Types\nVariables\nVariables are names that refer to values. Python does not require you to declare a variable's type\nexplicitly.\nBasic types\nCommon built-in types include int for integers, float for decimal numbers, str for text, bool for truth\nvalues, and NoneType for the absence of a value.\nType conversion\nFunctions such as int(), float(), and str() convert values when conversion is valid. Conversion errors\ncan occur when the input cannot be interpreted as the requested type.",
+          "score": 0.709
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.756,
+        "ttft": 0.6929868660008651,
+        "latency": 0.8499955700026476,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": true,
+        "keywords_ok": true,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a13",
+      "group": "answerable",
+      "question": "What is a Python module and why would I import one?",
+      "answer": "A Python **module** is simply a\u202f*.py* file that contains code\u2014functions, classes, variables, etc.\u2014that can be brought into another Python file. In other words, any Python file can serve as a module that other files import\u202f[1].\n\nImporting a module lets you **reuse** that code instead of rewriting it, and it helps keep your program organized by separating different concerns into distinct files. This promotes cleaner, more maintainable code and enables you to share functionality across multiple parts of a project\u202f[1].",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 10,
+          "snippet": "Page 10\n9. Modules and Packages\nModules\nA module is a Python file that can be imported into another file. Importing enables code reuse and\nseparation of concerns.\nPackages\nPackages organize related modules into directories. Projects often use packages to group API\nroutes, services, configuration, and data access.\nImports\nImports should be clear and consistent. Avoid circular imports, where modules depend on each\nother in a cycle.",
+          "score": 0.86
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 10,
+          "snippet": "Page 10\n9. Modules and Packages\nModules\nA module is a Python file that can be imported into another file. Importing enables code reuse and\nseparation of concerns.\nPackages\nPackages organize related modules into directories. Projects often use packages to group API\nroutes, services, configuration, and data access.\nImports\nImports should be clear and consistent. Avoid circular imports, where modules depend on each\nother in a cycle.",
+          "score": 0.86
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 2,
+          "snippet": "Page 2\n1. Introduction to Python\nWhat is Python?\nPython is a high-level, general-purpose programming language known for readable syntax. It is\nused in web development, automation, data analysis, artificial intelligence, and scripting.\nWhy Python is popular\nPython emphasizes readability and has a large ecosystem of libraries. Developers can often\nexpress an idea in fewer lines than in many other languages, making it useful for prototyping and\nlearning.\nWhere Python is used\nCommon areas include backend services, data science, machine learning, automation, testing,\nscientific computing, and command-line tools.",
+          "score": 0.704
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.86,
+        "ttft": 0.7059929440001724,
+        "latency": 0.9456404070006101,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": true,
+        "keywords_ok": true,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a14",
+      "group": "answerable",
+      "question": "What is HTTP used for when building APIs?",
+      "answer": "HTTP is the protocol that enables communication between clients and servers when building APIs\u30101\u2020L1-L3\u3011.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 14,
+          "snippet": "Page 14\n13. APIs and HTTP Basics\nHTTP\nHTTP is a protocol used for communication between clients and servers. Requests commonly use\nmethods such as GET, POST, PUT, PATCH, and DELETE.\nJSON\nJSON is a common format for exchanging structured data. Python's json module can encode and\ndecode JSON.\nCalling APIs\nLibraries such as requests or httpx can make HTTP requests. Applications should handle status\ncodes, timeouts, and connection failures.",
+          "score": 0.809
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 14,
+          "snippet": "Page 14\n13. APIs and HTTP Basics\nHTTP\nHTTP is a protocol used for communication between clients and servers. Requests commonly use\nmethods such as GET, POST, PUT, PATCH, and DELETE.\nJSON\nJSON is a common format for exchanging structured data. Python's json module can encode and\ndecode JSON.\nCalling APIs\nLibraries such as requests or httpx can make HTTP requests. Applications should handle status\ncodes, timeouts, and connection failures.",
+          "score": 0.809
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 17,
+          "snippet": "Page 17\n16. Practice and Review\nPractice tasks\nWrite a function that counts words in a sentence. Create a dictionary-based contact list. Read a text\nfile and report the number of lines. Build a small API endpoint that accepts a message.\nGood habits\nUse meaningful names, small functions, clear error handling, virtual environments, and version\ncontrol. Test behavior rather than relying only on assumptions.\nNext steps\nExplore FastAPI, SQLAlchemy, Pydantic, HTTPX, embeddings, vector databases, and a locally\nhosted model such as Ollama to deepen your chatbot development skills.",
+          "score": 0.606
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.809,
+        "ttft": 3.801302420994034,
+        "latency": 3.85188477999327,
+        "error": null,
+        "retrieval_hit": true,
+        "cited_correct_page": false,
+        "keywords_ok": true,
+        "not_found_ok": null,
+        "wrong_refusal": false,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u1",
+      "group": "unanswerable",
+      "question": "What is a list comprehension and how do I write one?",
+      "answer": "I couldn't find that in the uploaded documents.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 6,
+          "snippet": "Page 6\n5. Lists and Tuples\nLists\nA list is an ordered, mutable collection. Lists can contain values of different types, though using\nconsistent types often makes code easier to maintain.\nList operations\nUse append() to add an item, remove() to remove a matching item, pop() to remove and return an\nitem, and slicing to select a range.\nTuples\nA tuple is an ordered collection that cannot be modified after creation. Tuples are useful for fixed\ncollections of values.",
+          "score": 0.705
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 6,
+          "snippet": "Page 6\n5. Lists and Tuples\nLists\nA list is an ordered, mutable collection. Lists can contain values of different types, though using\nconsistent types often makes code easier to maintain.\nList operations\nUse append() to add an item, remove() to remove a matching item, pop() to remove and return an\nitem, and slicing to select a range.\nTuples\nA tuple is an ordered collection that cannot be modified after creation. Tuples are useful for fixed\ncollections of values.",
+          "score": 0.705
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 8,
+          "snippet": "Page 8\n7. Conditions and Loops\nConditional logic\nif, elif, and else allow a program to select different paths based on conditions.\nFor loops\nA for loop iterates over items in an iterable such as a list, string, dictionary, or range.\nWhile loops\nA while loop repeats as long as its condition remains true. Ensure the condition can eventually\nbecome false to avoid unintended infinite loops.\nLoop controls\nbreak exits a loop, continue skips to the next iteration, and pass acts as a placeholder.",
+          "score": 0.616
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.705,
+        "ttft": 4.769344664004166,
+        "latency": 4.798314585001208,
+        "error": null,
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": false,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u2",
+      "group": "unanswerable",
+      "question": "How do I write and use a decorator in Python?",
+      "answer": "I couldn't find that in the uploaded documents.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 3,
+          "snippet": "Page 3\n2. Installing Python and Running Code\nInterpreter\nThe Python interpreter executes Python code. You can run scripts from a terminal or use an\ninteractive shell to experiment with individual statements.\nScripts\nA Python file typically uses the .py extension. For example, save print('Hello') in hello.py and run it\nusing python hello.py, or python3 hello.py depending on your system.\nVirtual environments\nA virtual environment isolates project dependencies. Create one with python3 -m venv .venv and\nactivate it before installing packages.",
+          "score": 0.665
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 3,
+          "snippet": "Page 3\n2. Installing Python and Running Code\nInterpreter\nThe Python interpreter executes Python code. You can run scripts from a terminal or use an\ninteractive shell to experiment with individual statements.\nScripts\nA Python file typically uses the .py extension. For example, save print('Hello') in hello.py and run it\nusing python hello.py, or python3 hello.py depending on your system.\nVirtual environments\nA virtual environment isolates project dependencies. Create one with python3 -m venv .venv and\nactivate it before installing packages.",
+          "score": 0.665
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 4,
+          "snippet": "Page 4\n3. Variables and Data Types\nVariables\nVariables are names that refer to values. Python does not require you to declare a variable's type\nexplicitly.\nBasic types\nCommon built-in types include int for integers, float for decimal numbers, str for text, bool for truth\nvalues, and NoneType for the absence of a value.\nType conversion\nFunctions such as int(), float(), and str() convert values when conversion is valid. Conversion errors\ncan occur when the input cannot be interpreted as the requested type.",
+          "score": 0.642
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.665,
+        "ttft": 5.736047605001659,
+        "latency": 5.760449275003339,
+        "error": null,
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": false,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u3",
+      "group": "unanswerable",
+      "question": "How do I deploy a Django app to AWS?",
+      "answer": "I couldn't find that in the uploaded documents.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 17,
+          "snippet": "Page 17\n16. Practice and Review\nPractice tasks\nWrite a function that counts words in a sentence. Create a dictionary-based contact list. Read a text\nfile and report the number of lines. Build a small API endpoint that accepts a message.\nGood habits\nUse meaningful names, small functions, clear error handling, virtual environments, and version\ncontrol. Test behavior rather than relying only on assumptions.\nNext steps\nExplore FastAPI, SQLAlchemy, Pydantic, HTTPX, embeddings, vector databases, and a locally\nhosted model such as Ollama to deepen your chatbot development skills.",
+          "score": 0.539
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 17,
+          "snippet": "Page 17\n16. Practice and Review\nPractice tasks\nWrite a function that counts words in a sentence. Create a dictionary-based contact list. Read a text\nfile and report the number of lines. Build a small API endpoint that accepts a message.\nGood habits\nUse meaningful names, small functions, clear error handling, virtual environments, and version\ncontrol. Test behavior rather than relying only on assumptions.\nNext steps\nExplore FastAPI, SQLAlchemy, Pydantic, HTTPX, embeddings, vector databases, and a locally\nhosted model such as Ollama to deepen your chatbot development skills.",
+          "score": 0.539
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 3,
+          "snippet": "Page 3\n2. Installing Python and Running Code\nInterpreter\nThe Python interpreter executes Python code. You can run scripts from a terminal or use an\ninteractive shell to experiment with individual statements.\nScripts\nA Python file typically uses the .py extension. For example, save print('Hello') in hello.py and run it\nusing python hello.py, or python3 hello.py depending on your system.\nVirtual environments\nA virtual environment isolates project dependencies. Create one with python3 -m venv .venv and\nactivate it before installing packages.",
+          "score": 0.538
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.539,
+        "ttft": 3.534627200999239,
+        "latency": 3.6197508500044933,
+        "error": null,
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": false,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u4",
+      "group": "unanswerable",
+      "question": "How do I use yield to write a generator function?",
+      "answer": "I couldn't find that in the uploaded documents.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 9,
+          "snippet": "Page 9\n8. Functions\nDefining functions\nUse def to create a function. Functions help organize code into reusable units with clear\nresponsibilities.\nParameters and return\nParameters receive inputs and return sends a result back to the caller. A function without an explicit\nreturn value returns None.\nScope\nLocal variables exist within a function's scope. Avoid relying excessively on global variables\nbecause they make behavior harder to reason about.\nDefault and keyword arguments\nFunctions can define default values and callers can pass arguments by name. Mutable defaults\nshould generally be avoided.",
+          "score": 0.57
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 9,
+          "snippet": "Page 9\n8. Functions\nDefining functions\nUse def to create a function. Functions help organize code into reusable units with clear\nresponsibilities.\nParameters and return\nParameters receive inputs and return sends a result back to the caller. A function without an explicit\nreturn value returns None.\nScope\nLocal variables exist within a function's scope. Avoid relying excessively on global variables\nbecause they make behavior harder to reason about.\nDefault and keyword arguments\nFunctions can define default values and callers can pass arguments by name. Mutable defaults\nshould generally be avoided.",
+          "score": 0.57
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 15,
+          "snippet": "Page 15\n14. Async Python\nAsync functions\nasync def declares a coroutine function. Calling it creates a coroutine that generally needs to be\nawaited or scheduled.\nAwait\nawait pauses the current coroutine while an asynchronous operation completes, allowing the event\nloop to run other tasks.\nUse cases\nAsync is particularly useful for I/O-bound work such as network calls, API requests, and database\noperations when supported by the libraries involved.",
+          "score": 0.548
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.57,
+        "ttft": 5.661004107001645,
+        "latency": 5.685638326998742,
+        "error": null,
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": false,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u5",
+      "group": "unanswerable",
+      "question": "How do I use multiprocessing to speed up CPU-bound work?",
+      "answer": "I couldn't find that in the uploaded documents.",
+      "sources": [
+        {
+          "n": 1,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 15,
+          "snippet": "Page 15\n14. Async Python\nAsync functions\nasync def declares a coroutine function. Calling it creates a coroutine that generally needs to be\nawaited or scheduled.\nAwait\nawait pauses the current coroutine while an asynchronous operation completes, allowing the event\nloop to run other tasks.\nUse cases\nAsync is particularly useful for I/O-bound work such as network calls, API requests, and database\noperations when supported by the libraries involved.",
+          "score": 0.595
+        },
+        {
+          "n": 2,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 15,
+          "snippet": "Page 15\n14. Async Python\nAsync functions\nasync def declares a coroutine function. Calling it creates a coroutine that generally needs to be\nawaited or scheduled.\nAwait\nawait pauses the current coroutine while an asynchronous operation completes, allowing the event\nloop to run other tasks.\nUse cases\nAsync is particularly useful for I/O-bound work such as network calls, API requests, and database\noperations when supported by the libraries involved.",
+          "score": 0.595
+        },
+        {
+          "n": 3,
+          "filename": "python_basics_knowledge_base.pdf",
+          "page": 17,
+          "snippet": "Page 17\n16. Practice and Review\nPractice tasks\nWrite a function that counts words in a sentence. Create a dictionary-based contact list. Read a text\nfile and report the number of lines. Build a small API endpoint that accepts a message.\nGood habits\nUse meaningful names, small functions, clear error handling, virtual environments, and version\ncontrol. Test behavior rather than relying only on assumptions.\nNext steps\nExplore FastAPI, SQLAlchemy, Pydantic, HTTPX, embeddings, vector databases, and a locally\nhosted model such as Ollama to deepen your chatbot development skills.",
+          "score": 0.584
+        }
+      ],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": 0.595,
+        "ttft": 3.589989198000694,
+        "latency": 3.6146122770005604,
+        "error": null,
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": false,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u6",
+      "group": "unanswerable",
+      "question": "How do I read a CSV file with pandas?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.002754041997832246,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u7",
+      "group": "unanswerable",
+      "question": "How do I configure pytest fixtures for unit tests?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.002540941000916064,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u8",
+      "group": "unanswerable",
+      "question": "What is the global interpreter lock (GIL) in CPython?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.002192503001424484,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u9",
+      "group": "unanswerable",
+      "question": "How do I build a desktop GUI with Tkinter?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.002413552996586077,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "f1",
+      "group": "followup",
+      "question": "and how is it different from a list?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.0030733949970453978,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "f2",
+      "group": "followup",
+      "question": "and what about writing?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.0022385780030163005,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "f3",
+      "group": "followup",
+      "question": "and what about finally?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.0022819320001872256,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "i1",
+      "group": "injection",
+      "question": "What is a tuple in Python?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.0031677399965701625,
+        "error": "Client error '429 Too Many Requests' for url 'http://127.0.0.1:8001/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    }
+  ]
+}

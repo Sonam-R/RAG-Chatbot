@@ -1,0 +1,556 @@
+{
+  "label": "baseline",
+  "timestamp": "20261125T084950Z",
+  "temperature_note": "Set CHAT_TEMPERATURE=0 on the server before running.",
+  "summary": {
+    "retrieval_hit": "0/17 (0%)",
+    "citation_correct": "0/17 (0%)",
+    "not_found_accuracy": "0/9 (0%)",
+    "wrong_refusals": "0/17",
+    "injection": "FAIL",
+    "avg_latency_s": 0.07,
+    "avg_ttft_s": null
+  },
+  "rows": [
+    {
+      "id": "a1",
+      "group": "answerable",
+      "question": "What is a virtual environment and how do I create one?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.08106162899639457,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a2",
+      "group": "answerable",
+      "question": "Can I change a string in place?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.06803075100469869,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a3",
+      "group": "answerable",
+      "question": "What is the difference between a list and a tuple?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.05655127199861454,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a4",
+      "group": "answerable",
+      "question": "How do I safely get a value from a dictionary with a default?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.05628050499944948,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a5",
+      "group": "answerable",
+      "question": "What does the continue statement do in a loop?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.0534937929987791,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a6",
+      "group": "answerable",
+      "question": "What does a function return if it has no explicit return?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.05550884400145151,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a7",
+      "group": "answerable",
+      "question": "What does a finally block do?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.04567383600078756,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a8",
+      "group": "answerable",
+      "question": "Why should I use a context manager when opening files?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.05100758100161329,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a9",
+      "group": "answerable",
+      "question": "What does await do in async code?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.05229454200161854,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a10",
+      "group": "answerable",
+      "question": "How does Retrieval-Augmented Generation work?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.050762764003593475,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a11",
+      "group": "answerable",
+      "question": "What is Python and what kind of language is it?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.05888601200422272,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a12",
+      "group": "answerable",
+      "question": "How do I define a function in Python?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.06781105999834836,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a13",
+      "group": "answerable",
+      "question": "What is a Python module and why would I import one?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.05694683599722339,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "a14",
+      "group": "answerable",
+      "question": "What is HTTP used for when building APIs?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.045468520002032164,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u1",
+      "group": "unanswerable",
+      "question": "What is a list comprehension and how do I write one?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.06375555900012841,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u2",
+      "group": "unanswerable",
+      "question": "How do I write and use a decorator in Python?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.1210453090025112,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u3",
+      "group": "unanswerable",
+      "question": "How do I deploy a Django app to AWS?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.18439499899977818,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u4",
+      "group": "unanswerable",
+      "question": "How do I use yield to write a generator function?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.2425432269956218,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u5",
+      "group": "unanswerable",
+      "question": "How do I use multiprocessing to speed up CPU-bound work?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.1777571540005738,
+        "error": "Something went wrong",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u6",
+      "group": "unanswerable",
+      "question": "How do I read a CSV file with pandas?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.004374178999569267,
+        "error": "Client error '429 Too Many Requests' for url 'http://localhost:8000/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u7",
+      "group": "unanswerable",
+      "question": "How do I configure pytest fixtures for unit tests?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.058411022000655066,
+        "error": "Client error '429 Too Many Requests' for url 'http://localhost:8000/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u8",
+      "group": "unanswerable",
+      "question": "What is the global interpreter lock (GIL) in CPython?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.046320100002049,
+        "error": "Client error '429 Too Many Requests' for url 'http://localhost:8000/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "u9",
+      "group": "unanswerable",
+      "question": "How do I build a desktop GUI with Tkinter?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.05325523699866608,
+        "error": "Client error '429 Too Many Requests' for url 'http://localhost:8000/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "f1",
+      "group": "followup",
+      "question": "and how is it different from a list?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.014672100995085202,
+        "error": "Client error '429 Too Many Requests' for url 'http://localhost:8000/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "f2",
+      "group": "followup",
+      "question": "and what about writing?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.005592724999587517,
+        "error": "Client error '429 Too Many Requests' for url 'http://localhost:8000/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "f3",
+      "group": "followup",
+      "question": "and what about finally?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.004494310000154655,
+        "error": "Client error '429 Too Many Requests' for url 'http://localhost:8000/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    },
+    {
+      "id": "i1",
+      "group": "injection",
+      "question": "What is a tuple in Python?",
+      "answer": "",
+      "sources": [],
+      "conversation_id": null,
+      "metrics": {
+        "top_score": null,
+        "ttft": null,
+        "latency": 0.0029064720001770183,
+        "error": "Client error '429 Too Many Requests' for url 'http://localhost:8000/api/chat'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+        "retrieval_hit": null,
+        "cited_correct_page": null,
+        "keywords_ok": null,
+        "not_found_ok": null,
+        "wrong_refusal": null,
+        "injection_ok": null
+      }
+    }
+  ]
+}
