@@ -1,3 +1,5 @@
+import { MAX_UPLOAD_MB } from "./constants";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 export type Source = {
@@ -16,10 +18,20 @@ export type Document = {
   created_at: string;
 };
 
+export type VerificationResult = {
+  status: "ok" | "unverified";
+  invalid_citations?: number[];
+  missing_citation?: boolean;
+  unsupported_numbers?: number[];
+};
+
 export type ChatMessage = {
   role: "user" | "assistant";
   content: string;
   sources?: Source[] | null;
+  statusText?: string | null;
+  verification?: VerificationResult | null;
+  isRefusal?: boolean;
 };
 
 export type StreamEvent = {
@@ -28,6 +40,8 @@ export type StreamEvent = {
   error?: string;
   done?: boolean;
   sources?: Source[];
+  status?: string;
+  verification?: VerificationResult;
 };
 
 async function apiError(res: Response): Promise<Error> {
@@ -78,6 +92,39 @@ export async function streamChat(params: {
   });
   if (!res.ok || !res.body) throw await apiError(res);
 
+  const dispatchPayload = (payload: string) => {
+    if (payload === "[DONE]") {
+      params.onEvent({ done: true });
+      return true;
+    }
+    try {
+      const data = JSON.parse(payload) as StreamEvent & {
+        status?: string;
+        verification?: VerificationResult;
+        sources?: Source[];
+      };
+      if (typeof data.status === "string") {
+        params.onEvent({ status: data.status });
+      }
+      if (data.verification) {
+        params.onEvent({ verification: data.verification });
+      }
+      if (Array.isArray(data.sources)) {
+        params.onSources?.(data.sources);
+      }
+      if (
+        typeof data.conversation_id === "string" ||
+        typeof data.token === "string" ||
+        typeof data.error === "string"
+      ) {
+        params.onEvent(data);
+      }
+    } catch {
+      // skip malformed SSE payloads
+    }
+    return false;
+  };
+
   const decoder = new TextDecoder();
   const reader = res.body.getReader();
   let buffer = "";
@@ -85,35 +132,24 @@ export async function streamChat(params: {
     const { done, value } = await reader.read();
     if (done) break;
     buffer += decoder.decode(value, { stream: true });
-    const lines = buffer.split("\n");
-    buffer = lines.pop() ?? "";
-    for (const raw of lines) {
-      const line = raw.trim();
-      if (!line) continue;
-      if (line.startsWith("data:")) {
+    buffer = buffer.replace(/\r\n/g, "\n");
+    const blocks = buffer.split("\n\n");
+    buffer = blocks.pop() ?? "";
+    for (const block of blocks) {
+      for (const raw of block.split("\n")) {
+        const line = raw.trim();
+        if (!line.startsWith("data:")) continue;
         const payload = line.slice(5).trim();
-        if (payload === "[DONE]") {
-          params.onEvent({ done: true });
-          return;
-        }
-        try {
-          const data = JSON.parse(payload) as StreamEvent & { status?: string };
-          if ("status" in data) continue;
-          if (Array.isArray(data.sources)) {
-            params.onSources?.(data.sources);
-            continue;
-          }
-          if (
-            "conversation_id" in data ||
-            "token" in data ||
-            "error" in data
-          ) {
-            params.onEvent(data);
-          }
-        } catch {
-          // skip malformed SSE payloads
-        }
+        if (dispatchPayload(payload)) return;
       }
+    }
+  }
+  if (buffer.trim()) {
+    for (const raw of buffer.split("\n")) {
+      const line = raw.trim();
+      if (!line.startsWith("data:")) continue;
+      const payload = line.slice(5).trim();
+      if (dispatchPayload(payload)) return;
     }
   }
   params.onEvent({ done: true });
@@ -130,11 +166,20 @@ export async function fetchConversation(id: string) {
   };
 }
 
+export function mapUploadHttpError(status: number): string {
+  if (status === 400) return "Unsupported file type. Use PDF, TXT, or MD.";
+  if (status === 413) return `File is too large (max ${MAX_UPLOAD_MB} MB).`;
+  if (status === 422)
+    return "No readable text in this file. Scanned PDFs are not supported yet.";
+  if (status === 0) return "Network error. Check your connection.";
+  return `Upload failed (${status}).`;
+}
+
 export async function uploadDocument(file: File): Promise<Document> {
   const body = new FormData();
   body.append("file", file);
   const res = await fetch(`${API_URL}/api/documents`, { method: "POST", body });
-  if (!res.ok) throw await apiError(res);
+  if (!res.ok) throw new Error(mapUploadHttpError(res.status));
   const data = (await res.json()) as {
     doc_id: string;
     filename: string;
@@ -148,6 +193,47 @@ export async function uploadDocument(file: File): Promise<Document> {
     chunks: data.chunks,
     created_at: new Date().toISOString(),
   };
+}
+
+/** XMLHttpRequest upload for progress / clear processing phases. */
+export function uploadDocumentXHR(
+  file: File,
+  onProgress?: (loaded: number, total: number) => void,
+): Promise<Document> {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    const body = new FormData();
+    body.append("file", file);
+    xhr.open("POST", `${API_URL}/api/documents`);
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        try {
+          const data = JSON.parse(xhr.responseText) as {
+            doc_id: string;
+            filename: string;
+            pages: number;
+            chunks: number;
+          };
+          resolve({
+            id: data.doc_id,
+            filename: data.filename,
+            pages: data.pages,
+            chunks: data.chunks,
+            created_at: new Date().toISOString(),
+          });
+        } catch {
+          reject(new Error("Invalid server response"));
+        }
+        return;
+      }
+      reject(new Error(mapUploadHttpError(xhr.status)));
+    };
+    xhr.onerror = () => reject(new Error(mapUploadHttpError(0)));
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable) onProgress?.(e.loaded, e.total);
+    };
+    xhr.send(body);
+  });
 }
 
 export async function listDocuments(): Promise<Document[]> {

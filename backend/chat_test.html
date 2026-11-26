@@ -23,7 +23,8 @@
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          messages: [{role: 'user', content: 'Explain RAG in two sentences'}]
+          message: 'Explain RAG in two sentences',
+          use_documents: false
         })
       });
 

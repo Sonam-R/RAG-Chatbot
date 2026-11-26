@@ -178,6 +178,21 @@ def _emit_audit(metrics: ChatRequestMetrics) -> None:
     log_chat_audit(metrics.to_log_dict(get_request_id()))
 
 
+def _sse_data(payload: object) -> str:
+    return f"data: {json.dumps(payload)}\n\n"
+
+
+def _unwrap_custom_event(event: object) -> dict | None:
+    """LangGraph custom stream may yield a dict or (namespace, dict) tuples."""
+    if isinstance(event, dict):
+        return event
+    if isinstance(event, (list, tuple)) and len(event) == 2:
+        _ns, data = event
+        if isinstance(data, dict):
+            return data
+    return None
+
+
 @router.post("/chat")
 @limiter.limit(settings.rate_limit_chat)
 async def chat(request: Request, req: ChatRequest):
@@ -209,67 +224,68 @@ async def chat(request: Request, req: ChatRequest):
         )
         messages_for_llm = [{"role": m.role, "content": m.content} for m in history]
         prior_history = messages_for_llm[:-1]
-        conv_id = conv.id
+        conv_id = str(conv.id)
         use_documents = req.use_documents
+        question = req.message
+        history_for_graph = [
+            {"role": m["role"], "content": m["content"]} for m in prior_history
+        ]
 
         metrics = ChatRequestMetrics(
             conversation_id=conv_id,
             use_documents=use_documents,
-            question_chars=len(req.message),
-        )
-
-        async def event_stream():
-            # -------------------------------------------------
-            # Build the LangGraph state (only serialisable data)
-            # -------------------------------------------------
-            state: dict = {
-                "request_id": get_request_id(),
-                "question": req.message,
-                "history": [
-                    {"role": m.role, "content": m.content}
-                    for m in prior_history
-                ],
-                "use_documents": use_documents,
-                "retries": 0,
-            }
-
-            answer_parts: list[str] = []
-            final_sources: list[dict] | None = None
-
-            try:
-                async for event in rag_graph.astream(state, stream_mode="custom"):
-                    if not isinstance(event, dict):
-                        continue
-                    if "token" in event:
-                        answer_parts.append(event["token"])
-                        yield f"data: {json.dumps({'token': event['token']})}\n\n"
-                    elif "sources" in event:
-                        final_sources = event["sources"]
-                        yield f"data: {json.dumps({'sources': final_sources})}\n\n"
-                    elif "status" in event:
-                        yield f"data: {json.dumps({'status': event['status']})}\n\n"
-                    elif "verification" in event:
-                        yield f"data: {json.dumps({'verification': event['verification']})}\n\n"
-                    elif "error" in event:
-                        raise RuntimeError(event["error"])
-            except Exception:
-                logger.exception("Graph execution failed", exc_info=True)
-                # generic error event – front‑end expects a single error dict
-                yield f"data: {json.dumps({'error': 'Something went wrong'})}\n\n"
-            finally:
-                # Persist whatever we have collected (partial answer is okay on cancel)
-                answer_text = "".join(answer_parts)
-                _save_assistant(conv_id, answer_text, final_sources)
-                # End of stream marker (always sent, even on error)
-                yield "data: [DONE]\n\n"
-
-        return StreamingResponse(
-            event_stream(),
-            media_type="text/event-stream",
-            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+            question_chars=len(question),
         )
     finally:
         db.close()
+
+    async def event_stream():
+        state: dict = {
+            "request_id": get_request_id(),
+            "question": question,
+            "history": history_for_graph,
+            "use_documents": use_documents,
+            "retries": 0,
+        }
+        yield _sse_data({"conversation_id": conv_id})
+
+        answer_parts: list[str] = []
+        final_sources: list[dict] | None = None
+
+        try:
+            async for raw in rag_graph.astream(state, stream_mode="custom"):
+                event = _unwrap_custom_event(raw)
+                if not event:
+                    continue
+                if "token" in event:
+                    answer_parts.append(event["token"])
+                    yield _sse_data({"token": event["token"]})
+                elif "sources" in event:
+                    final_sources = event["sources"]
+                    yield _sse_data({"sources": final_sources})
+                elif "status" in event:
+                    yield _sse_data({"status": event["status"]})
+                elif "verification" in event:
+                    yield _sse_data({"verification": event["verification"]})
+                elif "error" in event:
+                    raise RuntimeError(event["error"])
+        except Exception:
+            logger.exception("Graph execution failed")
+            yield _sse_data({"error": "Something went wrong"})
+        finally:
+            answer_text = "".join(answer_parts)
+            _save_assistant(conv_id, answer_text, final_sources)
+            yield "data: [DONE]\n\n"
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache, no-transform",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )
 
 
 @router.get("/conversations/{conversation_id}", response_model=ConversationOut)
